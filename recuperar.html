@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class=".col-md-4 col-sm-4 col-xs-12"></div>
+
+        <div class=".col-md-4 col-sm-4 col-xs-12">
+            <div class="form-title text-center">
+                <h4 style="font-weight: 800;"> Restablecer contraseña </h4>
+            </div>
+            <form class="formulario">
+                <div class="form-group">
+                    <label for="exampleInputEmail1"> Ingrese el correo electrónico con el que registró en el sistema </label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary  btn-block" id="enviar"><a style="text-decoration:none; color: white;">Enviar</a></button>
+
+
+
+                <script>
+                    document.getElementById("enviar").onclick = function() {
+                        myFunction()
+                    };
+
+                    function myFunction() {
+                        Swal.fire({
+                            title: 'success!',
+                            text: 'Do you want to continue',
+                            icon: 'success',
+                            confirmButtonText: 'Cool'
+                        })
+                    }
+                </script>
+
+
+            </form>
+
+        </div>
+
+    </div>

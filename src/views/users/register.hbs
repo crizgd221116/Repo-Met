@@ -1,0 +1,33 @@
+<body class="backgroundimg">
+  <div class="container-fluid" style="margin-bottom: 120px;">
+    <div class="row">
+      <!--<div class=".col-md-4 col-sm-4 col-xs-12 ">  <img src="/images/weather.jpg" class="mt-5 backgroundimg"  style="margin-left: 10px;" alt=""></div > -->
+      <div class=".col-md-4 col-sm-4 col-xs-12"></div>
+      <div class=".col-md-4 col-sm-4 col-xs-12">
+        <div class="form-title text-center">
+          <h4 style="font-weight: 800;"> Registro</h4>          
+
+        </div>
+        <form class="formulario" action="/users/register" method="POST">
+          <div class="form-group">
+            <label for="nombres">Nombres </label>
+            <input type="name" class="form-control" id="name" name="name" value="{{name}}">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Correo </label>
+            <input type="email" class="form-control" id="email" name="email" value="{{email}}">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" value="{{password}}">
+          </div>
+          <div class="form-group">
+            <label for="confpass">Confirmación contraseña</label>
+            <input type="password" class="form-control" id="password2" name="password2" value="{{confirmPassword}}">
+          </div>
+          <button type="submit" class="btn btn-success btn-block">Crear cuenta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>

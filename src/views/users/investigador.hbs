@@ -1,0 +1,63 @@
+<div class="card-deck" style="margin-top: 180px; margin-left: 20px;margin-right: 20px;">
+        <div class="card card-invest" id="remmaq" style="cursor: pointer;">
+            <center>
+            <img src="/images/remmaq.png" style="width: 230px;padding: 30px; margin-top: 10px;" alt="remmaq">
+            <div class="card-body">
+                <h5 class="card-title text-center">REMMAQ</h5>
+                <p class="card-text text-center">Subir archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.</p>
+
+            </div>
+            </center>
+        </div>
+        <div class="card card-invest" id="inamhi" style="cursor: pointer;">
+            <center>
+            <img src="/images/inamhi.png" style="width: 230px;padding: 30px; margin-top: 10px" alt="INAMHI">
+            <div class="card-body">
+                <h5 class="card-title text-center" style="margin-top: -10px;">INAMHI</h5>
+                <p class="card-text text-center">Subir archivos de Instituto Nacional de Meteorología e Hidrología.</p>
+
+            </div>
+            </center>
+        </div>
+        <div class="card card-invest" id="hist" style="cursor: pointer;">
+            <center>
+            <img src="/images/historial.png" style="width: 160px;padding: 30px;" alt="historial">
+            <div class="card-body">
+                <h5 class="card-title text-center" style="margin-top: -22px;">Historial</h5>
+                <p class="card-text text-center">Visualizar la informacion subida.</p>
+
+            </div>
+            </center>
+        </div>
+        <div class="card card-invest" id="edit" style="cursor: pointer;">
+            <center>
+            <img src="/images/editar.png" style="width: 160px;padding: 30px;" alt="editar">
+            <div class="card-body">
+                <h5 class="card-title text-center" style="margin-top: -22px;">Editar</h5>
+                <p class="card-text text-center">Editar datos del Investigador</p>
+
+            </div>
+            </center>
+        </div>
+        <script>
+        document.getElementById("remmaq").onclick = function (){
+            window.location.href = "/users/uploadrem"
+        }
+        </script>
+        <script>
+        document.getElementById("inamhi").onclick = function (){
+            window.location.href = "/users/uploadin"
+        }
+        </script>
+        <script>
+        document.getElementById("hist").onclick = function (){
+            window.location.href = "/users/hist"
+        }
+        </script>        
+        <script>
+        document.getElementById("edit").onclick = function (){
+            window.location.href = "/users/editinfo"
+        }
+        </script>
+        
+    </div>
