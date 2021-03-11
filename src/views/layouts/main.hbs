@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repositorio Metereológico</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="icon" href="/images/clima.png">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;1,400&display=swap"
+    rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-repo">
+    <a class="navbar-brand" href="/">
+      <img src="/images/clima.png" height="54" alt="repositorio">
+      <h4> Repositorio Meteorológico</h3>
+    </a>
+    <div style="justify-content: flex-end;" class="collapse navbar-collapse" id="navbarSupportedContent">
+      {{#if user}}
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          ¡Hola! {{user.name}}
+        </button >
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/users/editinfo">Editar Perfil</a>
+          <a class="dropdown-item" href="/users/invest">Investigador</a>
+          <a class="dropdown-item" href="/users/logout" target="_blank" > Logout</a>  
+         
+                
+        </div>
+      </div>
+      {{else}}
+      <form class="form-inline my-2 my-lg-0">
+        <a class="btn btn-info" style="margin-right: 6px;" href="/users/login">Iniciar Sesión </a>
+        <a class="btn btn-info" href="/users/register">Registro</a>
+      </form>
+      {{/if}}
+    </div>
+
+
+    <!--<form class="form-inline" style="justify-content: space-between;">
+      <a href="/users/signin" class="btn btn btn-outline-info my-2 my-sm-0" style="margin-right:5px;color: white;"
+        type="submit">Iniciar sesión</a>
+      <a href="/users/register" class="btn btn btn-outline-info my-2 my-sm-0" type="submit"
+        style="color: white;">Registrarse</a>
+    </form>-->
+  </nav>
+  {{> messages }}
+  {{{body}}}
+  {{> errors }}
+
+
+
+
+
+</body>
+
+<footer id="sticky-footer" class="py-3 bg-dark text-white-50 fixed-bottom" ">
+  <div class=" container text-center">
+  <small style="font-size: medium;">Desarrollado por Estudiantes de la Universidad Politécnica Salesiana <img
+      src="/images/footerimage.png" width="30px" style="margin-left: 5px;" alt="ups"></small>
+  </div>
+  <div class="container text-center">
+    <a href="mailto:jcastillov1@est.ups.edu.ec" style="font-weight: bold; font-size: medium;">Jonathan Castillo -</a>
+    <a href="mailto:csalazarc1@est.ups.edu.ec" style="font-weight: bold; font-size: medium;"> Cristhian Salazar</a>
+  </div>
+  <div class="container text-center">
+    <small style="font-size: medium;">Derechos Reservados &copy; 2021</small>
+  </div>
+
+</footer>
+
+
+
+
+
+</html>
