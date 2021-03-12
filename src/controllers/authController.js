@@ -46,14 +46,14 @@ exports.registerHandle = (req, res) => {
             } else {
 
                 const oauth2Client = new OAuth2(
-                    "173872994719-pvsnau5mbj47h0c6ea6ojrl7gjqq1908.apps.googleusercontent.com", // ClientID
-                    "OKXIYR14wBB_zumf30EC__iJ", // Client Secret
+                    "1443120397-d6qgl41bfq45n0flhhfmvr9fkl6lo2ti.apps.googleusercontent.com", // ClientID
+                    "kC_x2z4Zxm4T1VBledyz4hkh", // Client Secret
                     "https://developers.google.com/oauthplayground" // Redirect URL
                 );
                 console.log(1)
 
                 oauth2Client.setCredentials({
-                    refresh_token: "1//04T_nqlj9UVrVCgYIARAAGAQSNwF-L9IrGm-NOdEKBOakzMn1cbbCHgg2ivkad3Q_hMyBkSQen0b5ABfR8kPR18aOoqhRrSlPm9w"
+                    refresh_token: "1//04HSIph3MovVKCgYIARAAGAQSNwF-L9IrhwE-KEWGXUneceDMqR7OL2TdxGnFdqEDYSPp4NtxcwXLxMcbRtCa46YnouDVmVj4KhU"
                 });
 
                 console.log(2)
@@ -64,26 +64,210 @@ exports.registerHandle = (req, res) => {
                 const CLIENT_URL = 'http://' + req.headers.host;
 
                 const output = `
-                <h2>Por favor ingrese al enlace a continuación para activar su cuenta</h2>
-                <p>${CLIENT_URL}/activate/${token}</p>
-                <p><b>NOTE: </b> El enlace de activación caduca en 3 minutos.</p>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <title></title>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <style type="text/css">
+                    /* FONTS */
+                    @media screen {
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 400;
+                        src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+                        }
+                        
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 700;
+                        src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+                        }
+                        
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: italic;
+                        font-weight: 400;
+                        src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+                        }
+                        
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: italic;
+                        font-weight: 700;
+                        src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+                        }
+                    }
+                    
+                    /* CLIENT-SPECIFIC STYLES */
+                    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+                    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+                    img { -ms-interpolation-mode: bicubic; }
+
+                    /* RESET STYLES */
+                    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+                    table { border-collapse: collapse !important; }
+                    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+                    /* iOS BLUE LINKS */
+                    a[x-apple-data-detectors] {
+                        color: inherit !important;
+                        text-decoration: none !important;
+                        font-size: inherit !important;
+                        font-family: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+                    }
+                    
+                    /* MOBILE STYLES */
+                    @media screen and (max-width:600px){
+                        h1 {
+                            font-size: 32px !important;
+                            line-height: 32px !important;
+                        }
+                    }
+
+                    /* ANDROID CENTER FIX */
+                    div[style*="margin: 16px 0;"] { margin: 0 !important; }
+                </style>
+                </head>
+                <body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
+
+                
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <!-- LOGO -->
+                    <tr>
+                        <td bgcolor="#025955" align="center">
+                            <!--[if (gte mso 9)|(IE)]>
+                            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                            <tr>
+                            <td align="center" valign="top" width="600">
+                            <![endif]-->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                                <tr>
+                                    <td align="center" valign="top" style="padding: 40px 10px 40px 10px;">
+                                        <a href="" target="_blank">
+                                            <img alt="Logo" src="https://img.pngio.com/cloud-cloudy-sun-sunny-weather-icon-weather-icons-png-512_512.png" width="40" height="40" style="display: block; width: 40px; max-width: 40px; min-width: 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            </tr>
+                            </table>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    <!-- HERO -->
+                    <tr>
+                        <td bgcolor="#025955" align="center" style="padding: 0px 10px 0px 10px;">
+                            <!--[if (gte mso 9)|(IE)]>
+                            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                            <tr>
+                            <td align="center" valign="top" width="600">
+                            <![endif]-->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                                <tr>
+                                    <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
+                                    <h1 style="font-size: 48px; font-weight: 400; margin: 0;">Bienvenido!</h1>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            </tr>
+                            </table>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    <!-- COPY BLOCK -->
+                    <tr>
+                        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
+                            <!--[if (gte mso 9)|(IE)]>
+                            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                            <tr>
+                            <td align="center" valign="top" width="600">
+                            <![endif]-->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                            <!-- COPY -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
+                                <p style="margin: 0;">Se ha registrado en el Repositorio de Datos Meteorológicos. Primero, debe activar su cuenta. Presione el botón a continuación:</p>
+                                </td>
+                            </tr>
+                            <!-- BULLETPROOF BUTTON -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                    <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
+                                        <table border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="center" style="border-radius: 3px;" bgcolor="#00917c"><a href="${CLIENT_URL}/activate/${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #ffffff; display: inline-block;">Activar cuenta</a></td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </table>
+                                </td>
+                            </tr>
+                            <!-- COPY -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
+                                
+                                </td>
+                            </tr>
+                            <!-- COPY -->
+                                <tr>
+                                
+                                </tr>
+                            <!-- COPY -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
+                                
+                                </td>
+                            </tr>
+                            <!-- COPY -->
+                            <tr>
+                                
+                            </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            </tr>
+                            </table>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    
+                    
+                </table>
+                    
+                </body>
+                </html>
                 `;
 
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
                         type: "OAuth2",
-                        user: "nodejsa@gmail.com",
-                        clientId: "173872994719-pvsnau5mbj47h0c6ea6ojrl7gjqq1908.apps.googleusercontent.com",
-                        clientSecret: "OKXIYR14wBB_zumf30EC__iJ",
-                        refreshToken: "1//04T_nqlj9UVrVCgYIARAAGAQSNwF-L9IrGm-NOdEKBOakzMn1cbbCHgg2ivkad3Q_hMyBkSQen0b5ABfR8kPR18aOoqhRrSlPm9w",
+                        user: "repometquito@gmail.com",
+                        clientId: "1443120397-d6qgl41bfq45n0flhhfmvr9fkl6lo2ti.apps.googleusercontent.com",
+                        clientSecret: "kC_x2z4Zxm4T1VBledyz4hkh",
+                        refreshToken: "1//04HSIph3MovVKCgYIARAAGAQSNwF-L9IrhwE-KEWGXUneceDMqR7OL2TdxGnFdqEDYSPp4NtxcwXLxMcbRtCa46YnouDVmVj4KhU",
                         accessToken: accessToken
                     },
                 });
 
                 // Envio de correo con transport object
                 const mailOptions = {
-                    from: '"Repo Admin" <nodejsa@gmail.com>', // Sender address
+                    from: '"Repo Admin" <repometquito@gmail.com>', // Sender address
                     to: email, // list of receivers
                     subject: "Activar cuenta: Repositorio Meteorológico ✔", // Subject line
                     generateTextFromHTML: true,
@@ -188,22 +372,208 @@ exports.forgotPassword = (req, res) => {
             } else {
 
                 const oauth2Client = new OAuth2(
-                    "173872994719-pvsnau5mbj47h0c6ea6ojrl7gjqq1908.apps.googleusercontent.com", // ClientID
-                    "OKXIYR14wBB_zumf30EC__iJ", // Client Secret
+                    "1443120397-d6qgl41bfq45n0flhhfmvr9fkl6lo2ti.apps.googleusercontent.com", // ClientID
+                    "kC_x2z4Zxm4T1VBledyz4hkh", // Client Secret
                     "https://developers.google.com/oauthplayground" // Redirect URL
                 );
 
                 oauth2Client.setCredentials({
-                    refresh_token: "1//04T_nqlj9UVrVCgYIARAAGAQSNwF-L9IrGm-NOdEKBOakzMn1cbbCHgg2ivkad3Q_hMyBkSQen0b5ABfR8kPR18aOoqhRrSlPm9w"
+                    refresh_token: "1//04HSIph3MovVKCgYIARAAGAQSNwF-L9IrhwE-KEWGXUneceDMqR7OL2TdxGnFdqEDYSPp4NtxcwXLxMcbRtCa46YnouDVmVj4KhU"
                 });
                 const accessToken = oauth2Client.getAccessToken()
 
                 const token = jwt.sign({ _id: user._id }, JWT_RESET_KEY, { expiresIn: '5m' });
                 const CLIENT_URL = 'http://' + req.headers.host;
                 const output = `
-                <h2>Por favor ingrese al enlace a continuación para restablecer su contraseña</h2>
-                <p>${CLIENT_URL}/users/recuperar/${token}</p>
-                <p><b>NOTE: </b> El link caduca en 3 minutos.</p>
+                
+                <p><b>NOTA: </b> El enlace caduca en 3 minutos.</p>
+                <!DOCTYPE html>
+                <html>
+                <head>
+                <title></title>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <style type="text/css">
+                    /* FONTS */
+                    @media screen {
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 400;
+                        src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+                        }
+                        
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: normal;
+                        font-weight: 700;
+                        src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+                        }
+                        
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: italic;
+                        font-weight: 400;
+                        src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+                        }
+                        
+                        @font-face {
+                        font-family: 'Lato';
+                        font-style: italic;
+                        font-weight: 700;
+                        src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+                        }
+                    }
+                    
+                    /* CLIENT-SPECIFIC STYLES */
+                    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+                    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+                    img { -ms-interpolation-mode: bicubic; }
+
+                    /* RESET STYLES */
+                    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+                    table { border-collapse: collapse !important; }
+                    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+                    /* iOS BLUE LINKS */
+                    a[x-apple-data-detectors] {
+                        color: inherit !important;
+                        text-decoration: none !important;
+                        font-size: inherit !important;
+                        font-family: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+                    }
+                    
+                    /* MOBILE STYLES */
+                    @media screen and (max-width:600px){
+                        h1 {
+                            font-size: 32px !important;
+                            line-height: 32px !important;
+                        }
+                    }
+
+                    /* ANDROID CENTER FIX */
+                    div[style*="margin: 16px 0;"] { margin: 0 !important; }
+                </style>
+                </head>
+                <body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
+
+                
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <!-- LOGO -->
+                    <tr>
+                        <td bgcolor="#025955" align="center">
+                            <!--[if (gte mso 9)|(IE)]>
+                            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                            <tr>
+                            <td align="center" valign="top" width="600">
+                            <![endif]-->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                                <tr>
+                                    <td align="center" valign="top" style="padding: 40px 10px 40px 10px;">
+                                        <a href="" target="_blank">
+                                            <img alt="Logo" src="https://img.pngio.com/cloud-cloudy-sun-sunny-weather-icon-weather-icons-png-512_512.png" width="40" height="40" style="display: block; width: 40px; max-width: 40px; min-width: 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            </tr>
+                            </table>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    <!-- HERO -->
+                    <tr>
+                        <td bgcolor="#025955" align="center" style="padding: 0px 10px 0px 10px;">
+                            <!--[if (gte mso 9)|(IE)]>
+                            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                            <tr>
+                            <td align="center" valign="top" width="600">
+                            <![endif]-->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                                <tr>
+                                    <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
+                                    <h1 style="font-size: 48px; font-weight: 400; margin: 0;">¡Hola!</h1>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            </tr>
+                            </table>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    <!-- COPY BLOCK -->
+                    <tr>
+                        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
+                            <!--[if (gte mso 9)|(IE)]>
+                            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+                            <tr>
+                            <td align="center" valign="top" width="600">
+                            <![endif]-->
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
+                            <!-- COPY -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
+                                <p style="margin: 0;">Ha solicitado un cambio de contraseña en el Repositorio de Datos Meteorológicos. Por favor, presione el botón a continuación:</p>
+                                </td>
+                            </tr>
+                            <!-- BULLETPROOF BUTTON -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                    <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
+                                        <table border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="center" style="border-radius: 3px;" bgcolor="#00917c"><a href="${CLIENT_URL}/users/recuperar/${token}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #ffffff; display: inline-block;">Restablecer contraseña</a></td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </table>
+                                </td>
+                            </tr>
+                            <!-- COPY -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
+                                
+                                </td>
+                            </tr>
+                            <!-- COPY -->
+                                <tr>
+                                
+                                </tr>
+                            <!-- COPY -->
+                            <tr>
+                                <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
+                                
+                                </td>
+                            </tr>
+                            <!-- COPY -->
+                            <tr>
+                                
+                            </tr>
+                            </table>
+                            <!--[if (gte mso 9)|(IE)]>
+                            </td>
+                            </tr>
+                            </table>
+                            <![endif]-->
+                        </td>
+                    </tr>
+                    
+                    
+                </table>
+                    
+                </body>
+                </html>
                 `;
 
                 User.updateOne({ resetLink: token }, (err, success) => {
