@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const User = require('../models/User');
 //------------ Importar controladores  ------------//
 const authController = require('../controllers/authController')
 
@@ -39,22 +40,24 @@ router.get('/users/recuperar/:token', authController.gotoReset);
 router.post('/users/login', authController.loginHandle);
 
 //------------ Logout GET Handle ------------//
-router.get('/users/logout', (req, res) => {
-    req.logout();
-    req.flash('success_msg', 'Se ha cerrado sesión');
-    res.redirect('/');
+router.get('/users/logout', authController.logoutHandle);
 
+router.get('/users/editinfo/:id', isAuthenticated, async(req, res) => {
+    const userAuth = await User.findById(req.params.id);
+    res.render('users/editinfo.hbs', { userAuth });
 });
 
-//------------ Manejo cerrar sesión ------------//
-
-
-
-
-
-router.get('/users/editinfo', isAuthenticated, (req, res) => {
+router.put('/users/editinfo/:id', async(req, res) => {
+    const { /*genero,titulo,ocupacion,description*/ name, email, genero, titulo, ocupacion, description } = req.body;
+    console.log(req.body);
+    await User.findOneAndUpdate(
+        /* req.params.id,{/genero, titulo, ocupacion, descriptionname, email
+            } */
+        { _id: req.params.id }, { $set: req.body }, { new: true }
+    );
     res.render('users/editinfo.hbs');
 });
+
 router.get('/users/invest', isAuthenticated, (req, res) => {
     res.render('users/investigador.hbs');
 });

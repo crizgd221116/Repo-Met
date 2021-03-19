@@ -14,6 +14,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    genero: { type: String, default: 'M' },
+    titulo: { type: String, default: 'Ing' },
+    ocupacion: { type: String, default: 'Por definir' },
+    description: { type: String, default: 'Añadir desc' },
     verified: {
         type: Boolean,
         default: false
