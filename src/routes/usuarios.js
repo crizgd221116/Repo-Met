@@ -55,7 +55,8 @@ router.put('/users/editinfo/:id', async(req, res) => {
             } */
         { _id: req.params.id }, { $set: req.body }, { new: true }
     );
-    res.render('users/editinfo.hbs');
+    const userAuth = await User.findById(req.params.id);
+    res.render('users/editinfo.hbs', { userAuth });
 });
 
 router.get('/users/invest', isAuthenticated, (req, res) => {
