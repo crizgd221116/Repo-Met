@@ -1,7 +1,16 @@
 const express = require('express');
+const multer = require('multer');
+const xlsxFile = require('read-excel-file/node');
 const router = express.Router();
+//Configuracion Fecha
+/*const moment = require('moment');
+moment.locale('es');*/
+
+const moment = require('moment-timezone');
+moment.locale('es');
 
 const User = require('../models/User');
+const FileRemmaq =require('../models/FilesRemmaq');
 //------------ Importar controladores  ------------//
 const authController = require('../controllers/authController')
 
@@ -62,14 +71,57 @@ router.put('/users/editinfo/:id', async(req, res) => {
 router.get('/users/invest', isAuthenticated, (req, res) => {
     res.render('users/investigador.hbs');
 });
+//REMMAQ
 router.get('/users/uploadrem', isAuthenticated, (req, res) => {
     res.render('users/datosremmaq.hbs');
 });
+
+const storage = multer.diskStorage({
+    destination:'uploads/',
+    filename: function(req,file,callb){
+        callb("","remmaq.xlsx");
+    }
+})
+const upload = multer({
+    dest: 'uploads/',
+    storage:storage
+    });
+router.post('/users/uploadrem', isAuthenticated,upload.single('archivoremmaq'), async(req, res) => {
+    const {titu,origen,magnitud,description} =req.body;
+    const newFileRemmaq = new FileRemmaq({titu,origen,magnitud,description});
+    await newFileRemmaq.save();
+    console.log(newFileRemmaq);
+    xlsxFile('uploads/remmaq.xlsx').then((rows) => {
+      
+       /* for (i in rows){aasdadlllll12345678
+          
+            for (j in rows[i]){
+                
+            }
+                
+        }*/
+        
+        nombreEstaciones  = rows[0].filter((estacion)=> estacion != null);
+        console.log(nombreEstaciones);
+        console.log('Existen '+nombreEstaciones.length+ ' estaciones en este archivo :)');
+        console.log('registros '+rows.length);
+        console.log(moment(rows[2][0]).format("LLLL"));
+        console.log(moment(rows[rows.length-1][0],"MMMM DD YYYY,Z").tz("America/Guayaquil"));
+        
+    });
+    res.send('DATOS RECIBIDOS :)');
+});
+
+
 router.get('/users/uploadin', isAuthenticated, (req, res) => {
     res.render('users/datosinamhi.hbs');
 });
-router.get('/users/hist', isAuthenticated, (req, res) => {
-    res.render('users/historial.hbs');
+
+
+
+
+router.post('/users/hist', isAuthenticated, (req, res) => {
+    
 });
 
 function isAuthenticated(req, res, next) {

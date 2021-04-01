@@ -5,30 +5,29 @@
             <div class="form-title text-center">
                 <h4 style="font-weight: 800;"></h4><img src="/images/remmaq.png" width="128" height="64" alt="REMMAQ">
             </div>
-            <form class="formulario">
+            <form class="formulario" action="/users/uploadrem" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Subir archivo</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1" accept=".xls,.txt">
+                    <input type="file" class="form-control-file" name="archivoremmaq" id="exampleFormControlFile1" accept=".xlsx,.xls,.txt">
                 </div>
                 <div class="form-group">
                     <label for="origen">Titulo </label>
-                    <input type="text" class="form-control" id="titulo">
+                    <input type="text" class="form-control" name="titu">
                 </div>
                 <div class="form-group">
                     <label for="origen">Origen </label>
-                    <input type="text" class="form-control" id="origen">
+                    <input type="text" class="form-control" name="origen">
                 </div>
                 <div class="form-group">
                     <label for="magnitud">Magnitud </label>
-                    <input type="text" class="form-control" id="magnitud">
+                    <input type="text" class="form-control" name="magnitud">
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Descripción</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
                 </div>
                 <a href="">Añadir Metadatos</a>
-                <button type="submit" class="btn btn-primary btn-block"><a style="text-decoration:none; color: white;"
-                        href="#">Aceptar</a></button>
+                <button type="submit" class="btn btn-primary btn-block">Aceptar</button>
             </form>
     </div>
 </div>
