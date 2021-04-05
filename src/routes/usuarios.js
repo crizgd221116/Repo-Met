@@ -2,10 +2,11 @@ const express = require('express');
 const multer = require('multer');
 const xlsxFile = require('read-excel-file/node');
 const router = express.Router();
+const fs = require('fs');
 //Configuracion Fecha
 /*const moment = require('moment');
-moment.locale('es');*/
-
+moment.locale('es');
+*/
 const moment = require('moment-timezone');
 moment.locale('es');
 
@@ -86,32 +87,52 @@ const upload = multer({
     dest: 'uploads/',
     storage:storage
     });
-router.post('/users/uploadrem', isAuthenticated,upload.single('archivoremmaq'), async(req, res) => {
-    const {titu,origen,magnitud,description} =req.body;
-    const newFileRemmaq = new FileRemmaq({titu,origen,magnitud,description});
-    await newFileRemmaq.save();
+    router.post('/users/uploadrem', isAuthenticated,upload.single('archivoremmaq'), async(req, res) => {
+    const {tituloArchivo,origen,magnitud,description} =req.body;
+    let newFileRemmaq = new FileRemmaq({tituloArchivo,origen,magnitud,description});
     console.log(newFileRemmaq);
-    xlsxFile('uploads/remmaq.xlsx').then((rows) => {
-      
-       /* for (i in rows){aasdadlllll12345678
-          
-            for (j in rows[i]){
-                
-            }
-                
-        }*/
-        
-        nombreEstaciones  = rows[0].filter((estacion)=> estacion != null);
-        console.log(nombreEstaciones);
+    
+    // 
+    const rows = await xlsxFile('uploads/'+"remmaq"+".xlsx")
+    nombreEstaciones  = rows[0].filter((estacion)=> estacion != null);
+    //Estaciones nombres
+    estaciones_string ="";
+    for (const i in nombreEstaciones) {
+        estaciones_string += nombreEstaciones[i]+" ";
+    }
+    req.body.nombreestaciones = estaciones_string;
+    //Cantidad de estaciones
+    numestaciones = nombreEstaciones.length;
+    req.body.numestaciones = numestaciones;
+    //
+    numeroRegistros =rows.length;
+    req.body.numregistros = numeroRegistros;
+    
+    /*.then((rows) => {       
         console.log('Existen '+nombreEstaciones.length+ ' estaciones en este archivo :)');
         console.log('registros '+rows.length);
-        console.log(moment(rows[2][0]).format("LLLL"));
-        console.log(moment(rows[rows.length-1][0],"MMMM DD YYYY,Z").tz("America/Guayaquil"));
+        cantidad =rows.length;
         
-    });
-    res.send('DATOS RECIBIDOS :)');
+        console.log(req.body);
+        console.log(cantidad);
+        console.log(estaciones_string);
+        console.log(numestaciones);
+        console.log(moment(rows[2][0]).format("LLLL"));
+    console.log(moment(rows[rows.length-1][0],"MMMM DD YYYY,Z").tz("America/Guayaquil"));
+    });*/
+    //console.log(archivo);
+    console.log(moment(rows[2][0]).format("MMMM DD YYYY, h:mm:ss a"));
+    console.log(moment(rows[rows.length-1][0]).format("MMMM DD YYYY, h:mm:ss a"));
+    newFileRemmaq.nombreestaciones =estaciones_string;
+    newFileRemmaq.user = req.user.id;
+    await newFileRemmaq.save();
+    
+    res.render('users/resumenremmaq.hbs',{datosRemmaq: req.body});
 });
 
+router.get('/users/archivosRemmaq', isAuthenticated, (req, res) => {
+    res.render('users/archivosMetereologicos.hbs');
+});
 
 router.get('/users/uploadin', isAuthenticated, (req, res) => {
     res.render('users/datosinamhi.hbs');
@@ -120,8 +141,9 @@ router.get('/users/uploadin', isAuthenticated, (req, res) => {
 
 
 
-router.post('/users/hist', isAuthenticated, (req, res) => {
-    
+router.get('/users/hist', isAuthenticated,async(req, res) => {
+    const archivos = await FileRemmaq.find({user:req.user.id});
+    res.render('users/historialArchivos.hbs',{archivos});
 });
 
 function isAuthenticated(req, res, next) {
