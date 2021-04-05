@@ -13,8 +13,8 @@ const User = require('../models/User');
 const FileRemmaq =require('../models/FilesRemmaq');
 //------------ Importar controladores  ------------//
 const authController = require('../controllers/authController')
-
-//------------ ruta login------------//
+const { ensureAuthenticated } = require('../config/checkAuth')
+    //------------ ruta login------------//
 router.get('/users/login', (req, res) => res.render('users/login.hbs'));
 
 //------------ recuperar contraseña ------------//
@@ -51,7 +51,7 @@ router.post('/users/login', authController.loginHandle);
 //------------ Logout GET Handle ------------//
 router.get('/users/logout', authController.logoutHandle);
 
-router.get('/users/editinfo/:id', isAuthenticated, async(req, res) => {
+router.get('/users/editinfo/:id', ensureAuthenticated, async(req, res) => {
     const userAuth = await User.findById(req.params.id);
     res.render('users/editinfo.hbs', { userAuth });
 });
@@ -68,9 +68,10 @@ router.put('/users/editinfo/:id', async(req, res) => {
     res.render('users/editinfo.hbs', { userAuth });
 });
 
-router.get('/users/invest', isAuthenticated, (req, res) => {
-    res.render('users/investigador.hbs');
+router.get('/users/invest', ensureAuthenticated, (req, res) => {
+    res.render('users/investigador.hbs', { name: req.user.name });
 });
+<<<<<<< Updated upstream
 //REMMAQ
 router.get('/users/uploadrem', isAuthenticated, (req, res) => {
     res.render('users/datosremmaq.hbs');
@@ -122,13 +123,18 @@ router.get('/users/uploadin', isAuthenticated, (req, res) => {
 
 router.post('/users/hist', isAuthenticated, (req, res) => {
     
+=======
+router.get('/users/uploadrem', ensureAuthenticated, (req, res) => {
+    res.render('users/datosremmaq.hbs', { name: req.user.name });
+});
+router.get('/users/uploadin', ensureAuthenticated, (req, res) => {
+    res.render('users/datosinamhi.hbs', { name: req.user.name });
+});
+router.get('/users/hist', ensureAuthenticated, (req, res) => {
+    res.render('users/historial.hbs', { name: req.user.name });
+>>>>>>> Stashed changes
 });
 
-function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/');
-}
+
 
 module.exports = router;

@@ -47,8 +47,8 @@
                     <div class="form-group"></div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Título académico</label>
-                        <select class="form-control cmbTitulo" id="exampleFormControlSelect1" name="titulo" placeholder="{{userAuth.titulo}}">
-                            <option value="0" selected>--- Seleccione ---</option>
+                        <select class="form-control cmbTitulo" id="exampleFormControlSelect1" name="titulo"> 
+                            <option value="{{userAuth.titulo}}" selected>--- {{userAuth.titulo}} ---</option>
                             <option value="Ingeniero">Ingenier@</option>
                             <option value="Fisico">Físic@</option>
                             <option value="Matematico">Matemátic@</option>
@@ -59,11 +59,11 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect2">Ocupación</label>
-                        <select class="form-control cmbOcupacion" id="exampleFormControlSelect2" name="ocupacion" aria-placeholder="{{userAuth.ocupacion}}">
-                            <option value="0">Seleccione</option>
-                            <option value="Docente Universitario" >Docente Universitario</option>
+                        <select class="form-control cmbOcupacion" id="exampleFormControlSelect2" name="ocupacion">
+                            <option value="{{userAuth.ocupacion}}"> --- {{userAuth.ocupacion}} ---</option>
+                            <option value="Docente Universitario">Docente Universitario</option>
                             <option value="Docente de Bachillerato">Docente de Bachillerato</option>
-                            <option value="Estuadiante de Colegio">Estudiante de Colegio</option>
+                            <option value="Estudiante de Colegio">Estudiante de Colegio</option>
                             <option value="Estudiante de Pregrado">Estudiante de Pregrado</option>
                             <option value="Estudiante de Posgrado">Estudiante de Posgrado</option>
                             <option value="Investigador">Investigador/a</option>
@@ -71,8 +71,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="textodescrip">Bio</label>
-                        <textarea type="text" class="form-control" id="textodescrip" name="description" placeholder="{{userAuth.description}}"></textarea>
+                        <label for="description">Bio</label>
+                        <textarea type="text" class="form-control"  name="description" placeholder="{{userAuth.description}}">{{userAuth.description}} </textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block"><a
