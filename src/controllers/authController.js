@@ -709,9 +709,9 @@ exports.loginHandle = (req, res, next) => {
 }
 
 //------------ Manejo cerrar sesión ------------//
-exports.logoutHandle = (req, res, next) => {
+exports.logoutHandle = (req, res) => {
     req.logout();
-    req.flash('success_msg', 'You are logged out');
+    req.flash('success_msg', 'se ha cerrado sesión');
     res.redirect('/');
 
 }
