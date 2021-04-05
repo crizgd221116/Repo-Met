@@ -1,0 +1,28 @@
+<center>
+    <h1>Historial de archivos {{user.name}}</h1>
+</center>
+<div class="container-fluid" style="margin-top: 50px;">
+    <div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 1024px;">
+        {{#each archivos}}
+            <div class="card card-carrera">
+                <div class="card-body">
+                    <h4 class="card-title">Titulo: {{tituloArchivo}}</h4>
+                    <p class="card-text"> Archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.
+                    </p>
+                    <p class="card-text">
+                        
+                        <!---Autor: <a href="" style="color: black;">{{user.name}}</a>-->
+                        
+                        | Origen: <a href="" style="color: black;"> {{origen}}</a>
+                        | Magnitud: <a href="" style="color: black;">{{magnitud}} </a>
+                        | Estaciones: <a href="" style="color: black;">{{nombreestaciones}} </a>
+                        | Descripción: <a href="" style="color: black;">{{description}}</a>
+                    </p>
+                </div>
+
+            </div>
+        <br>
+        {{/each}}
+       
+    </div>
+</div>
