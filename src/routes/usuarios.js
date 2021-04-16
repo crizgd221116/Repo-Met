@@ -9,6 +9,7 @@ moment.locale('es');
 */
 const moment = require('moment-timezone');
 moment.locale('es');
+moment.tz.setDefault("America/Guayaquil");
 
 const User = require('../models/User');
 const FileRemmaq =require('../models/FilesRemmaq');
@@ -119,13 +120,18 @@ const upload = multer({
         console.log(numestaciones);
         console.log(moment(rows[2][0]).format("LLLL"));
     console.log(moment(rows[rows.length-1][0],"MMMM DD YYYY,Z").tz("America/Guayaquil"));
-    });*/
-    //console.log(archivo);
+
     console.log(moment(rows[2][0]).format("MMMM DD YYYY"));
     console.log(moment(rows[rows.length-1][0],"MMMM DD YYYY,Z"));
+    });*/
+    //console.log(archivo);
+    let fechainicio = new Date(rows[2][0]);
+    console.log("DESDE "+fechainicio);
+    let fechafin = new Date(rows[rows.length-1][0]);
+    console.log("HASTA "+fechafin);
     newFileRemmaq.nombreestaciones =estaciones_string;
     newFileRemmaq.user = req.user.id;
-    await newFileRemmaq.save();
+    //await newFileRemmaq.save();
     
     res.render('users/resumenremmaq.hbs',{datosRemmaq: req.body});
 });
