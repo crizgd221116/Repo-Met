@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class=".col-md-4 col-sm-4 col-xs-12"></div>
+    <div class=".col-md-4 col-sm-4 col-xs-12">
+      <div class="form-title-res text-center">
+        <h4 style="font-weight: 800;"> Resumen </h4>
+      </div>
+      </br>
+      <table class="table table-striped">
+
+        <tbody>
+          <tr>
+            <th scope="row">Título del archivo:</th>
+            <td>{{datosRemmaq.tituloArchivo}}</td>
+
+          </tr>
+          <tr>
+            <th scope="row">Estaciones encontradas:</th>
+            <td>{{datosRemmaq.nombreestaciones}}</td>
+
+          </tr>
+          <tr>
+            <th scope="row">Cantidad de estaciones encontradas:</th>
+            <td>{{datosRemmaq.numestaciones}}</td>
+
+          </tr>
+          <tr>
+            <th scope="row">Origen de los datos:</th>
+            <td>{{datosRemmaq.origen}}</td>
+
+          </tr>
+          
+          <tr>
+            <th scope="row">Magnitud:</th>
+            <td>{{datosRemmaq.magnitud}}</td>
+
+          </tr>
+          <tr>
+            <th scope="row">Descripción de los datos:</th>
+            <td>{{datosRemmaq.description}}</td>
+
+          </tr>
+          <tr>
+            <th scope="row">Número de registros:</th>
+            <td>{{datosRemmaq.numregistros}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+      <center>
+      <h4 class="display-10">¿Datos correctos?</h4>
+      <a class="btn btn-primary btn-lg" href="/users/hist" role="button">Si</a> <a class="btn btn-primary btn-lg" href="/users/uploadrem" role="button">No</a>
+      </center>
+
+    </div>
+  </div>
+</div>
