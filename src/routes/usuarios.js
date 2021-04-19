@@ -135,7 +135,7 @@ router.post('/users/uploadrem', isAuthenticated, upload.single('archivoremmaq'),
     newFileRemmaq.user = req.user.id;
     //await newFileRemmaq.save();
 
-    res.render('users/resumenremmaq.hbs', { datosRemmaq: req.body });
+    res.render('users/resumentablaremmaq.hbs', { datosRemmaq: req.body });
 });
 
 
