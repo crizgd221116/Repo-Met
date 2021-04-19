@@ -30,7 +30,8 @@
         "nodemailer": "^6.4.18",
         "passport": "^0.4.1",
         "passport-local": "^1.0.0",
-        "read-excel-file": "^5.0.0"
+        "read-excel-file": "^5.0.0",
+        "xlsx": "^0.16.9"
     },
     "devDependencies": {
         "nodemon": "^2.0.7"

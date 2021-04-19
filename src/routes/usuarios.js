@@ -7,9 +7,7 @@ const fs = require('fs');
 /*const moment = require('moment');
 moment.locale('es');
 */
-const moment = require('moment-timezone');
-moment.locale('es');
-moment.tz.setDefault("America/Guayaquil");
+const XLSX=require('xlsx');
 
 const User = require('../models/User');
 const FileRemmaq = require('../models/FilesRemmaq');
@@ -96,20 +94,44 @@ router.post('/users/uploadrem', isAuthenticated, upload.single('archivoremmaq'),
     console.log(newFileRemmaq);
 
     // 
-    const rows = await xlsxFile('uploads/' + "remmaq" + ".xlsx")
-    nombreEstaciones = rows[0].filter((estacion) => estacion != null);
+    var workbook=XLSX.readFile('uploads/'+"remmaq"+".xlsx", {type:'binary',cellText:false,cellDates:true});
+    
+    var sheet_name_list = workbook.SheetNames;
+    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]],{header:1,raw:false,dateNF:'yyyy-mm-dd HH:mm:ss'});
+    //Cantidad de registros en el archivo
+     numestaciones = xlData.length;
+     req.body.numestaciones = numestaciones;
+    //Fecha de inicio del archivo
+     let fechainicio = xlData[3]+'' ;
+     let dateleft = fechainicio.split(",",1).toString();
+     req.body.firstdate = dateleft;
+    
+    
+     //Fecha de fin del archivo
+     let fechafin = xlData[xlData.length-1]+'' ;
+     let datefin = fechafin.split(",",1).toString();
+     req.body.lastdate = datefin;
+     
+     // Nombre de estaciones
+     let estaciones = xlData[0].filter((estacion) => estacion != null) +'';
+     let nombreEstaciones = estaciones.split(",").toString();
+     req.body.estacionesname = nombreEstaciones;
+      
+     numeroRegistros = xlData.length;
+     req.body.numregistros = numeroRegistros;
+    
     //Estaciones nombres
-    estaciones_string = "";
-    for (const i in nombreEstaciones) {
-        estaciones_string += nombreEstaciones[i] + " ";
-    }
-    req.body.nombreestaciones = estaciones_string;
+    // estaciones_string = "";
+    // for (const i in nombreEstaciones) {
+        // estaciones_string += nombreEstaciones[i] + " ";
+    // }
+    // req.body.nombreestaciones = estaciones_string;
     //Cantidad de estaciones
-    numestaciones = nombreEstaciones.length;
-    req.body.numestaciones = numestaciones;
+    // numestaciones = nombreEstaciones.length;
+    // req.body.numestaciones = numestaciones;
     //
-    numeroRegistros = rows.length;
-    req.body.numregistros = numeroRegistros;
+    // numeroRegistros = rows.length;
+    // req.body.numregistros = numeroRegistros;
 
     /*.then((rows) => {       
         console.log('Existen '+nombreEstaciones.length+ ' estaciones en este archivo :)');
@@ -127,12 +149,12 @@ router.post('/users/uploadrem', isAuthenticated, upload.single('archivoremmaq'),
     console.log(moment(rows[rows.length-1][0],"MMMM DD YYYY,Z"));
     });*/
     //console.log(archivo);
-    let fechainicio = new Date(rows[2][0]);
-    console.log("DESDE " + fechainicio);
-    let fechafin = new Date(rows[rows.length - 1][0]);
-    console.log("HASTA " + fechafin);
-    newFileRemmaq.nombreestaciones = estaciones_string;
-    newFileRemmaq.user = req.user.id;
+    // let fechainicio = new Date(rows[2][0]);
+    // console.log("DESDE " + fechainicio);
+    // let fechafin = new Date(rows[rows.length - 1][0]);
+    // console.log("HASTA " + fechafin);
+    // newFileRemmaq.nombreestaciones = estaciones_string;
+    // newFileRemmaq.user = req.user.id;
     //await newFileRemmaq.save();
 
     res.render('users/resumentablaremmaq.hbs', { datosRemmaq: req.body });
