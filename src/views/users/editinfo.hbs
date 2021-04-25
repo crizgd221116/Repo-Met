@@ -1,84 +1,71 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class=".col-md-4 col-sm-4 col-xs-12"></div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class=".col-md-4 col-sm-4 col-xs-12"></div>
-
-            <div class=".col-md-4 col-sm-4 col-xs-12">
-                <div class="form-title text-center">
-                    <h4 style="font-weight: 800;"> Editar Perfil</h4>
-                </div>
-                <form action="/users/editinfo/{{userAuth._id}}?_method=PUT" class="formulario" method="POST">
-                    <input type="hidden" name="_method" value="PUT">
-                    <div class="form-group">
-                        <label for="textonom">Nombre </label>
-                        <input type="text" class="form-control" name="name" value="{{userAuth.name}}" placeholder="{{userAuth.name}}" id="textonom"  disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email </label>
-                        <input type="email" class="form-control" value="{{userAuth.email}}" placeholder="{{userAuth.email}}" name="email" aria-describedby="emailHelp" disabled>
-                    </div>
-                    <label>Género</label>
-                    <div class="row">
-                        <div class="form-check ml-2">
-                            <input class="form-check-input" type="radio" name="genero" id="exampleRadios1" value="Masculino">
-                            <label class="form-check-label" for="exampleRadios1" >
-                                Masculino
-                            </label>
-                        </div>
-                        <div class="form-check ml-2">
-                            <input class="form-check-input" type="radio" name="genero" id="exampleRadios2" value="Femenino">
-                            <label class="form-check-label" for="exampleRadios2">
-                                Femenino
-                            </label>
-                        </div>
-                        <div class="form-check ml-2">
-                            <input class="form-check-input" type="radio" name="genero" id="exampleRadios3" value="Otro">
-                            <label class="form-check-label" for="exampleRadios3">
-                                Otro
-                            </label>
-                        </div>
-                        <div class="form-check ml-2">
-                            <input class="form-check-input" type="radio" name="genero" id="exampleRadios3" value="Prefiero no decirlo">
-                            <label class="form-check-label" for="exampleRadios4">
-                                Prefiero no decirlo
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group"></div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Título académico</label>
-                        <select class="form-control cmbTitulo" id="exampleFormControlSelect1" name="titulo"> 
-                            <option value="{{userAuth.titulo}}" selected>--- {{userAuth.titulo}} ---</option>
-                            <option value="Ingeniero">Ingenier@</option>
-                            <option value="Fisico">Físic@</option>
-                            <option value="Matematico">Matemátic@</option>
-                            <option value="Licenciado">Licenciad@</option>
-                            <option value="Magister">Magister</option>
-                            <option value="PHD">Phd</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect2">Ocupación</label>
-                        <select class="form-control cmbOcupacion" id="exampleFormControlSelect2" name="ocupacion">
-                            <option value="{{userAuth.ocupacion}}"> --- {{userAuth.ocupacion}} ---</option>
-                            <option value="Docente Universitario">Docente Universitario</option>
-                            <option value="Docente de Bachillerato">Docente de Bachillerato</option>
-                            <option value="Estudiante de Colegio">Estudiante de Colegio</option>
-                            <option value="Estudiante de Pregrado">Estudiante de Pregrado</option>
-                            <option value="Estudiante de Posgrado">Estudiante de Posgrado</option>
-                            <option value="Investigador">Investigador/a</option>
-                            <option value="Profesional independiente">Profesional independiente</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Bio</label>
-                        <textarea type="text" class="form-control"  name="description" placeholder="{{userAuth.description}}">{{userAuth.description}} </textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-block"><a
-                            style="text-decoration:none; color: white;">Actualizar</a></button>
-                </form>
-
+        <div class=".col-md-4 col-sm-4 col-xs-12">
+            <div class="form-title text-center">
+                <h4 style="font-weight: 800;"> Editar Perfil</h4>
             </div>
+            <form action="/users/editinfo/{{userAuth._id}}?_method=PUT" class="formulario" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <label for="textonom">Nombre </label>
+                    <input type="text" class="form-control" name="name" value="{{userAuth.name}}"
+                        placeholder="{{userAuth.name}}" id="textonom" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email </label>
+                    <input type="email" class="form-control" value="{{userAuth.email}}" placeholder="{{userAuth.email}}"
+                        name="email" aria-describedby="emailHelp" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Género</label>
+                    <select class="form-control cmbGenero" id="exampleFormControlSelect1" name="genero">
+                        <option value="{{userAuth.genero}}" selected>--- {{userAuth.genero}} ---</option>
+                        <option value="Masculino">Masculino ♂ </option>
+                        <option value="Femenino">Femenino ♀</option>
+                        <option value="Otro">Otro</option>
+                        <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Título académico</label>
+                    <select class="form-control cmbTitulo" id="exampleFormControlSelect2" name="titulo">
+                        <option value="{{userAuth.titulo}}" selected>--- {{userAuth.titulo}} ---</option>
+                        <option value="Ingeniero">Ingenier@</option>
+                        <option value="Fisico">Físic@</option>
+                        <option value="Matematico">Matemátic@</option>
+                        <option value="Licenciado">Licenciad@</option>
+                        <option value="Magister">Magister</option>
+                        <option value="PHD">Phd</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect2">Ocupación</label>
+                    <select class="form-control cmbOcupacion" id="exampleFormControlSelect2" name="ocupacion">
+                        <option value="{{userAuth.ocupacion}}"> --- {{userAuth.ocupacion}} ---</option>
+                        <option value="Docente Universitario">Docente Universitario</option>
+                        <option value="Docente de Bachillerato">Docente de Bachillerato</option>
+                        <option value="Estudiante de Colegio">Estudiante de Colegio</option>
+                        <option value="Estudiante de Pregrado">Estudiante de Pregrado</option>
+                        <option value="Estudiante de Posgrado">Estudiante de Posgrado</option>
+                        <option value="Investigador">Investigador/a</option>
+                        <option value="Profesional independiente">Profesional independiente</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Bio</label>
+                    <textarea type="text" class="form-control" name="description"
+                        placeholder="{{userAuth.description}}">{{userAuth.description}} </textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block"><a
+                        style="text-decoration:none; color: white;">Actualizar</a></button>
+            </form>
+
         </div>
     </div>
+</div>
