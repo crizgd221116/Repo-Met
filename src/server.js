@@ -8,6 +8,15 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+//subir archivos
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination:path.join(__dirname,'public/uploads'),
+    filename:(req,file,cb)=>{
+        cb(null,file.originalname);
+    }
+});
 
 const app = express();
 
@@ -34,7 +43,11 @@ app.engine('.hbs', exphbs({
 }));
 
 app.set('views engine', '.hbs');
-
+//------middlewares-----//
+app.use(multer({
+    storage,
+    dest:path.join(__dirname,'public/uploads')
+}).single('archivoremmaq'));
 //------------ Bodyparser Configuration ------------//
 app.use(express.urlencoded({ extended: false }))
 

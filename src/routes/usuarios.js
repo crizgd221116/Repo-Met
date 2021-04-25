@@ -77,24 +77,13 @@ router.get('/users/uploadrem', isAuthenticated, (req, res) => {
     res.render('users/datosremmaq.hbs');
 });
 
-
-const storage = multer.diskStorage({
-    destination: 'uploads/',
-    filename: function(req, file, callb) {
-        callb("", "remmaq.xlsx");
-    }
-})
-const upload = multer({
-    dest: 'uploads/',
-    storage: storage
-});
-router.post('/users/uploadrem', isAuthenticated, upload.single('archivoremmaq'), async(req, res) => {
+router.post('/users/uploadrem', isAuthenticated,async(req, res) => {
     const { tituloArchivo, origen, magnitud, description } = req.body;
     let newFileRemmaq = new FileRemmaq({ tituloArchivo, origen, magnitud, description });
-    console.log(newFileRemmaq);
+    console.log(/*newFileRemmaq*/req.file.path);
 
     // 
-    var workbook=XLSX.readFile('uploads/'+"remmaq"+".xlsx", {type:'binary',cellText:false,cellDates:true});
+    var workbook=XLSX.readFile(`${req.file.path}`, {type:'binary',cellText:false,cellDates:true});
     
     var sheet_name_list = workbook.SheetNames;
     var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]],{header:1,raw:false,dateNF:'yyyy-mm-dd HH:mm:ss'});
