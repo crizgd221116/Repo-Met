@@ -12,9 +12,9 @@ const passport = require('passport');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
-    destination:path.join(__dirname,'public/uploads'),
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname);
+    destination: path.join(__dirname, 'public/uploads'),
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
     }
 });
 
@@ -34,19 +34,80 @@ mongoose.connect('mongodb+srv://striker19:vmnGW4al2a0j55ah@repositorio.7ffg8.mon
 //------------ Settings ------------//
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
+
+
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs',
+    helpers: {
+        eq: function(v1, v2) {
+            return v1 === v2;
+        },
+        ne: function(v1, v2) {
+            return v1 !== v2;
+        },
+        lt: function(v1, v2) {
+            return v1 < v2;
+        },
+        gt: function(v1, v2) {
+            return v1 > v2;
+        },
+        lte: function(v1, v2) {
+            return v1 <= v2;
+        },
+        gte: function(v1, v2) {
+            return v1 >= v2;
+        },
+        and: function() {
+            return Array.prototype.slice.call(arguments).every(Boolean);
+        },
+        or: function() {
+            return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
+        },
+        ap: function(current, pages) {
+                var list = []
+
+                var i = (Number(current) > 5 ? Number(current) - 4 : 1)
+                if (i !== 1) {
+                    var li1 = '<li class="page-item disabled"><a href="#" class="page-link">...</a></li>'
+
+                }
+                for (; i <= (Number(current) + 4) && i <= pages; i++) { //for por cada pagina
+                    if (i == current) {
+                        var li1 = '<li class="page-item active"><a href="' + i + '" class="page-link">' + i + '</a></li>';
+                        list.push(li1)
+                    } else {
+                        var li1 = '<li class="page-item"><a href="/users/hist/' + i + '" class="page-link">' + i + '</a></li>'
+                        list.push(li1)
+                    }
+                    if (i == Number(current) + 4 && i < pages) {
+                        var li1 = '<li class="page-item disabled"><a href="#" class="page-link">...</a></li>'
+
+                    }
+
+
+                } //cierre del for
+                var lista = list.join("")
+                return lista
+            } //cierre de la funcio
+    },
     handlebars: allowInsecurePrototypeAccess(Handlebars)
+
+
+
 }));
 
-app.set('views engine', '.hbs');
+app.set('views engine', 'handlebars');
+
+
+
+
 //------middlewares-----//
 app.use(multer({
     storage,
-    dest:path.join(__dirname,'public/uploads')
+    dest: path.join(__dirname, 'public/uploads')
 }).single('archivoremmaq'));
 //------------ Bodyparser Configuration ------------//
 app.use(express.urlencoded({ extended: false }))

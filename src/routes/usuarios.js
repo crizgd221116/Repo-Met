@@ -7,7 +7,7 @@ const fs = require('fs');
 /*const moment = require('moment');
 moment.locale('es');
 */
-const XLSX=require('xlsx');
+const XLSX = require('xlsx');
 
 const User = require('../models/User');
 const FileRemmaq = require('../models/FilesRemmaq');
@@ -77,39 +77,39 @@ router.get('/users/uploadrem', isAuthenticated, (req, res) => {
     res.render('users/datosremmaq.hbs');
 });
 
-router.post('/users/uploadrem', isAuthenticated,async(req, res) => {
+router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
     const { tituloArchivo, origen, magnitud, description } = req.body;
     let newFileRemmaq = new FileRemmaq({ tituloArchivo, origen, magnitud, description });
-    console.log(/*newFileRemmaq*/req.file.path);
+    console.log( /*newFileRemmaq*/ req.file.path);
 
     // 
-    var workbook=XLSX.readFile(`${req.file.path}`, {type:'binary',cellText:false,cellDates:true});
-    
+    var workbook = XLSX.readFile(`${req.file.path}`, { type: 'binary', cellText: false, cellDates: true });
+
     var sheet_name_list = workbook.SheetNames;
-    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]],{header:1,raw:false,dateNF:'yyyy-mm-dd HH:mm:ss'});
+    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]], { header: 1, raw: false, dateNF: 'yyyy-mm-dd HH:mm:ss' });
     //Cantidad de registros en el archivo
-     numestaciones = xlData.length;
-     req.body.numestaciones = numestaciones;
+    numestaciones = xlData.length;
+    req.body.numestaciones = numestaciones;
     //Fecha de inicio del archivo
-     let fechainicio = xlData[3]+'' ;
-     let dateleft = fechainicio.split(",",1).toString();
-     req.body.firstdate = dateleft;
-    
-    
-     //Fecha de fin del archivo
-     let fechafin = xlData[xlData.length-1]+'' ;
-     let datefin = fechafin.split(",",1).toString();
-     req.body.lastdate = datefin;
-     
-     // Nombre de estaciones
-     let estaciones = xlData[0].filter((estacion) => estacion != null) +'';
-     let nombreEstaciones = estaciones.split(",").toString();
-     req.body.estacionesname = nombreEstaciones;
-      
-     numeroRegistros = xlData.length;
-     req.body.numregistros = numeroRegistros;
-    
-    
+    let fechainicio = xlData[3] + '';
+    let dateleft = fechainicio.split(",", 1).toString();
+    req.body.firstdate = dateleft;
+
+
+    //Fecha de fin del archivo
+    let fechafin = xlData[xlData.length - 1] + '';
+    let datefin = fechafin.split(",", 1).toString();
+    req.body.lastdate = datefin;
+
+    // Nombre de estaciones
+    let estaciones = xlData[0].filter((estacion) => estacion != null) + '';
+    let nombreEstaciones = estaciones.split(",").toString();
+    req.body.estacionesname = nombreEstaciones;
+
+    numeroRegistros = xlData.length;
+    req.body.numregistros = numeroRegistros;
+
+
     //newFileRemmaq.user = req.user.id;
     //await newFileRemmaq.save();
 
@@ -124,10 +124,28 @@ router.get('/users/archivosRemmaq', isAuthenticated, (req, res) => {
 router.get('/users/uploadin', isAuthenticated, (req, res) => {
     res.render('users/datosinamhi.hbs');
 });
-router.get('/users/hist', isAuthenticated, async(req, res) => {
-    const archivos = await FileRemmaq.find({ user: req.user.id });
-    res.render('users/historialArchivos.hbs', { archivos });
+router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
+    let perPage = 10;
+    let page = req.params.page || 1;
+
+    const archivos = await FileRemmaq.find({ user: req.user.id })
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec((err, archivos) => {
+            FileRemmaq.count((err, count) => {
+                if (err) return next(err);
+                res.render('users/historialArchivos.hbs', {
+                    archivos,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
+                });
+
+            })
+        })
+
 });
+
+
 
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
