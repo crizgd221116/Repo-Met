@@ -50,6 +50,7 @@ router.get('/users/recuperar/:token', authController.gotoReset);
 router.post('/users/login', authController.loginHandle);
 
 //------------ Logout GET Handle ------------//
+
 router.get('/users/logout', authController.logoutHandle);
 
 router.get('/users/editinfo/:id', isAuthenticated, async(req, res) => {
@@ -161,20 +162,23 @@ router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
     let perPage = 10;
     let page = req.params.page || 1;
 
-    const archivos = await FileRemmaq.find({ user: req.user.id })
+    await FileRemmaq.find({ user: req.user.id })
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, archivos) => {
-            FileRemmaq.count((err, count) => {
+            FileRemmaq.count({ user: req.user.id }, (err, count) => {
                 if (err) return next(err);
+                console.log(count)
+                console.log(Math.ceil(count / perPage))
                 res.render('users/historialArchivos.hbs', {
                     archivos,
-                    current: page,
+                    page,
                     pages: Math.ceil(count / perPage)
+
                 });
 
-            })
-        })
+            });
+        });
 
 });
 

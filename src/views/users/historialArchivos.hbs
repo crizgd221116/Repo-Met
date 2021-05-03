@@ -3,6 +3,7 @@
 </center>
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 1024px;">
+       
         {{#each archivos}}
         <div class="card card-carrera">
             <div class="card-body">
@@ -33,34 +34,19 @@
             <nav class="mx-auto">
                 <ul class="pagination">
                     <!--Primera Pagina-->
-                    {{#if (eq current 1)}}
-                    <li class="page-item disabled">
-                        <a href="#" class="page-link">First Page</a>
-                        <!--PRIMERA PAGINA-->
-                    </li>
-                    {{else}}
-                    <li class="page-item">
-                        <a href="/users/hist/1" class="page-link">First Page</a>
-                    </li>
-                    {{/if}}
+                    {{{pg page}}}
 
                     <!--PÁGINAS INTERMEDIAS-->
-                    {{{ap current pages}}}
+                    {{{ap page pages}}}
 
 
                     <!--ULTIMA-->
-                    {{#if (eq current pages)}}
-                    <li class="page-item disabled">
-                        <a href="#" class="page-link">last Page</a>
+                    {{{lp page pages}}}
 
-                    </li>
-                    {{else}}
-                    <li class="page-item">
-                        <a href="/users/hist/{{pages}}" class="page-link">Last Page</a>
-                    </li>
-                    {{/if}}
+
 
                 </ul>
+                <h6 class="text-center">Páginas encontradas: {{pages}}</h6>
             </nav>
 
             {{/if}}
