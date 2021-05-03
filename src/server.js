@@ -66,32 +66,59 @@ app.engine('.hbs', exphbs({
         or: function() {
             return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
         },
-        ap: function(current, pages) {
-                var list = []
+        pg: function(page) {
+            if (page == 1) {
+                let val = '<li class="page-item disabled"><a href="#" class="page-link">Primera Pagina</a></li>'
+                return val
+            } else {
+                let val = '<li class="page-item"> <a href="/users/hist/1" class="page-link">Primera Página</a></li>'
 
-                var i = (Number(current) > 5 ? Number(current) - 4 : 1)
-                if (i !== 1) {
-                    var li1 = '<li class="page-item disabled"><a href="#" class="page-link">...</a></li>'
+                return val
+            }
+
+
+
+        },
+        ap: function(page, pages) {
+            var list = []
+            var i = (Number(page) > 5 ? Number(page) - 4 : 1)
+            if (i !== 1) {
+                var li1 = '<li class="page-item disabled"><a class="page-link" href="#">....</a></li>';
+                list.push(li1);
+
+            }
+            for (; i <= (Number(page) + 4) && i <= pages; i++) { //for por cada pagina
+                if (i == page) {
+                    var li1 = '<li class="page-item active"><a href="' + i + '" class="page-link">' + i + '</a></li>';
+                    list.push(li1)
+
+                } else {
+                    var li1 = '<li class="page-item"><a href="/users/hist/' + i + '" class="page-link">' + i + '</a></li>'
+                    list.push(li1)
 
                 }
-                for (; i <= (Number(current) + 4) && i <= pages; i++) { //for por cada pagina
-                    if (i == current) {
-                        var li1 = '<li class="page-item active"><a href="' + i + '" class="page-link">' + i + '</a></li>';
-                        list.push(li1)
-                    } else {
-                        var li1 = '<li class="page-item"><a href="/users/hist/' + i + '" class="page-link">' + i + '</a></li>'
-                        list.push(li1)
-                    }
-                    if (i == Number(current) + 4 && i < pages) {
-                        var li1 = '<li class="page-item disabled"><a href="#" class="page-link">...</a></li>'
+                if (i == Number(page) + 4 && i < pages) {
+                    var li1 = '<li class = "page-item disabled"><a class="page-link" href="#" >...</a></li>'
+                    list.push(li1)
 
-                    }
+                }
 
+            } //cierre del for
+            var lista = list.join("")
+            return lista
+        }, //cierre de la funcio
+        lp: function(page, pages) {
+            if (page == pages) {
+                let val = '<li class="page-item disabled"><a href="" class="page-link">Última Página</a></li>'
+                return val
 
-                } //cierre del for
-                var lista = list.join("")
-                return lista
-            } //cierre de la funcio
+            } else {
+                let val = '<li class="page-item "><a href="/users/hist/' + pages + '" class="page-link">Última Página</a></li>'
+                return val
+            }
+
+        }
+
     },
     handlebars: allowInsecurePrototypeAccess(Handlebars)
 
@@ -109,6 +136,12 @@ app.use(multer({
     storage,
     dest: path.join(__dirname, 'public/uploads')
 }).single('archivoremmaq'));
+
+app.use(function(req, res, next) {
+    if (!req.user)
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    next();
+});
 //------------ Bodyparser Configuration ------------//
 app.use(express.urlencoded({ extended: false }))
 
@@ -147,6 +180,7 @@ app.use(require('./routes/usuarios'));
 
 //Static Files
 app.use(express.static(path.join(__dirname, '/public')));
+
 
 //Server is listenning
 
