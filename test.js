@@ -1,10 +1,12 @@
-const moment = require('moment-timezone');
-let date = "02/01/2004  10:00:00"//d/m/a
-/*let dateleft = date.substr(0,10);
-let datex = dateleft.split("/");
+const readline = require("readline"),
+    fs = require("fs"),
+    NOMBRE_ARCHIVO = 'uploads/ejemplo.txt';
 
-let dateright = date.substr(10,date.length-1).replace(/\s/g,"");*/
-let finaldate = new Date(date).toLocaleString(); 
-//console.log(dateright);
-console.log(finaldate);
+    let lector = readline.createInterface({
+    input: fs.createReadStream(NOMBRE_ARCHIVO)
+});
+
+lector.on("line", linea => {
+    console.log("Tenemos una línea:", linea);
+});
 
