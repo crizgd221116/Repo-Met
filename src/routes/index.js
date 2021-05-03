@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/checkAuth')
+const FileRemmaq = require('../models/FilesRemmaq');
 
-router.get('/', (req, res) => {
-    res.render('index.hbs');
+router.get('/', async(req, res) => {
+    const allfiles = await FileRemmaq.find();
+    //console.log(allfiles);
+    res.render('index.hbs',{allfiles});
 });
 router.get('/about', (req, res) => {
     res.render('about.hbs');

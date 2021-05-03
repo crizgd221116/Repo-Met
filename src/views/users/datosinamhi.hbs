@@ -6,10 +6,10 @@
                 <div class="form-title text-center">
                     <h4 style="font-weight: 800;"></h4> <img src="/images/inamhi.png" width="128" height="64" alt="INAMHI">
                 </div>
-                <form class="formulario">
+                <form class="formulario" action="/users/uploadin" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Subir archivo</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" accept=".xls,.txt">
+                        <input type="file" class="form-control-file" name="archivoinhami" id="exampleFormControlFile1" accept=".txt">
                     </div>
                     <div class="form-group">
                         <label for="origen">Titulo </label>

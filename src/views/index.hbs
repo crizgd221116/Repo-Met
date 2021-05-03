@@ -40,6 +40,8 @@
     </div>
 
     <div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 1024px;">
+        
+        {{#each allfiles}}
         <div class="card card-carrera">
             <div class="card-body">
                 <h4 class="card-title" style="color: #2e8a9b ;">Titulo</h4>
@@ -47,7 +49,7 @@
                 </p>
                 <p class="card-text">
                     Autor: <a href="" style="color: black;"> Nombre autor</a>
-                    | Origen: <a href="" style="color: black;"> Nombre origen</a>
+                    | Origen: <a href="" style="color: black;"> {{origen}}</a>
                     | Estación: <a href="" style="color: black;"> Nombre estación</a>
                     | Magnitud: <a href="" style="color: black;"> Nombre magnitud</a>
                 </p>
@@ -57,89 +59,10 @@
                 <button class="btn-success">XLS</button>
                 <button class="btn-secondary">Original</button>
             </div>
-
         </div>
         </br>
-        <div class="card card-carrera">
-            <div class="card-body">
-                <h4 class="card-title" style="color: #2e8a9b ;">Titulo</h4>
-                <p class="card-text"> Subir archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.
-                </p>
-                <p class="card-text">
-                    Autor: <a href="" style="color: black;"> Nombre autor</a>
-                    | Origen: <a href="" style="color: black;"> Nombre origen</a>
-                    | Estación: <a href="" style="color: black;"> Nombre estación</a>
-                    | Magnitud: <a href="" style="color: black;"> Nombre magnitud</a>
-                </p>
-
-                <p class="card-text">Mes/año de inicio - Mes/año de fin</p>
-                <button class="btn-primary">CSV</button>
-                <button class="btn-success">XLS</button>
-                <button class="btn-secondary">Original</button>
-            </div>
-
-        </div>
+        {{/each}}
         </br>
-        <div class="card card-carrera">
-            <div class="card-body">
-                <h4 class="card-title" style="color: #2e8a9b ;">Titulo</h4>
-                <p class="card-text"> Subir archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.
-                </p>
-                <p class="card-text">
-                    Autor: <a href="" style="color: black;"> Nombre autor</a>
-                    | Origen: <a href="" style="color: black;"> Nombre origen</a>
-                    | Estación: <a href="" style="color: black;"> Nombre estación</a>
-                    | Magnitud: <a href="" style="color: black;"> Nombre magnitud</a>
-                </p>
-
-                <p class="card-text">Mes/año de inicio - Mes/año de fin</p>
-                <button class="btn-primary">CSV</button>
-                <button class="btn-success">XLS</button>
-                <button class="btn-secondary">Original</button>
-            </div>
-
-        </div>
-        </br>
-        <div class="card card-carrera">
-            <div class="card-body">
-                <h4 class="card-title" style="color: #2e8a9b ;">Titulo</h4>
-                <p class="card-text"> Subir archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.
-                </p>
-                <p class="card-text">
-                    Autor: <a href="" style="color: black;"> Nombre autor</a>
-                    | Origen: <a href="" style="color: black;"> Nombre origen</a>
-                    | Estación: <a href="" style="color: black;"> Nombre estación</a>
-                    | Magnitud: <a href="" style="color: black;"> Nombre magnitud</a>
-                </p>
-
-                <p class="card-text">Mes/año de inicio - Mes/año de fin</p>
-                <button class="btn-primary">CSV</button>
-                <button class="btn-success">XLS</button>
-                <button class="btn-secondary">Original</button>
-            </div>
-
-        </div>
-        </br>
-        <div class="card card-carrera">
-            <div class="card-body">
-                <h4 class="card-title" style="color: #2e8a9b ;">Titulo</h4>
-                <p class="card-text">Subir archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.
-                </p>
-                <p class="card-text">
-                    Autor: <a href="" style="color: black;"> Nombre autor</a>
-                    | Origen: <a href="" style="color: black;"> Nombre origen</a>
-                    | Estación: <a href="" style="color: black;"> Nombre estación</a>
-                    | Magnitud: <a href="" style="color: black;"> Nombre magnitud</a>
-                </p>
-
-                <p class="card-text">Mes/año de inicio - Mes/año de fin</p>
-                <button class="btn-primary">CSV</button>
-                <button class="btn-success">XLS</button>
-                <button class="btn-secondary">Original</button>
-            </div>
-
-        </div> </br>
-
 
         <nav aria-label="Page navigation example">
             <ul class="pagination">
