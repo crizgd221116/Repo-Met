@@ -13,6 +13,7 @@ const User = require('../models/User');
 const FileRemmaq = require('../models/FilesRemmaq');
 //------------ Importar controladores  ------------//
 const authController = require('../controllers/authController')
+const readFileController = require('../controllers/readFileController');
 
 //------------ ruta login------------//
 router.get('/users/login', (req, res) => res.render('users/login.hbs'));
@@ -77,39 +78,45 @@ router.get('/users/uploadrem', isAuthenticated, (req, res) => {
     res.render('users/datosremmaq.hbs');
 });
 
-router.post('/users/uploadrem', isAuthenticated,async(req, res) => {
+const{
+    leerDatos,
+}= require('../controllers/readFileController');
+router.get('/users/uploadrem', isAuthenticated, (req, res) => {
+    res.render('users/resumentablaremmaq.hbs');
+});
+router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
     const { tituloArchivo, origen, magnitud, description } = req.body;
     let newFileRemmaq = new FileRemmaq({ tituloArchivo, origen, magnitud, description });
-    console.log(/*newFileRemmaq*/req.file.path);
+    console.log( /*newFileRemmaq*/ req.file.path);
 
     // 
-    var workbook=XLSX.readFile(`${req.file.path}`, {type:'binary',cellText:false,cellDates:true});
-    
+    var workbook = XLSX.readFile(`${req.file.path}`, { type: 'binary', cellText: false, cellDates: true });
+
     var sheet_name_list = workbook.SheetNames;
-    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]],{header:1,raw:false,dateNF:'yyyy-mm-dd HH:mm:ss'});
+    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]], { header: 1, raw: false, dateNF: 'yyyy-mm-dd HH:mm:ss' });
     //Cantidad de registros en el archivo
-     numestaciones = xlData.length;
-     req.body.numestaciones = numestaciones;
+    numestaciones = xlData.length;
+    req.body.numestaciones = numestaciones;
     //Fecha de inicio del archivo
-     let fechainicio = xlData[3]+'' ;
-     let dateleft = fechainicio.split(",",1).toString();
-     req.body.firstdate = dateleft;
-    
-    
-     //Fecha de fin del archivo
-     let fechafin = xlData[xlData.length-1]+'' ;
-     let datefin = fechafin.split(",",1).toString();
-     req.body.lastdate = datefin;
-     
-     // Nombre de estaciones
-     let estaciones = xlData[0].filter((estacion) => estacion != null) +'';
-     let nombreEstaciones = estaciones.split(",").toString();
-     req.body.estacionesname = nombreEstaciones;
-      
-     numeroRegistros = xlData.length;
-     req.body.numregistros = numeroRegistros;
-    
-    
+    let fechainicio = xlData[3] + '';
+    let dateleft = fechainicio.split(",", 1).toString();
+    req.body.firstdate = dateleft;
+
+
+    //Fecha de fin del archivo
+    let fechafin = xlData[xlData.length - 1] + '';
+    let datefin = fechafin.split(",", 1).toString();
+    req.body.lastdate = datefin;
+
+    // Nombre de estaciones
+    let estaciones = xlData[0].filter((estacion) => estacion != null) + '';
+    let nombreEstaciones = estaciones.split(",").toString();
+    req.body.estacionesname = nombreEstaciones;
+
+    numeroRegistros = xlData.length;
+    req.body.numregistros = numeroRegistros;
+
+
     //newFileRemmaq.user = req.user.id;
     //await newFileRemmaq.save();
 
@@ -120,15 +127,29 @@ router.post('/users/uploadrem', isAuthenticated,async(req, res) => {
 router.get('/users/archivosRemmaq', isAuthenticated, (req, res) => {
     res.render('users/archivosMetereologicos.hbs');
 });
-
+//INHAMI
+const storage = multer.diskStorage({
+    destination: 'uploads/',
+    filename: function(req, file, callb) {
+        callb("", "remmaq.xlsx");
+    }
+})
+const upload = multer({
+    dest: 'uploads/',
+    storage: storage
+});
 router.get('/users/uploadin', isAuthenticated, (req, res) => {
     res.render('users/datosinamhi.hbs');
 });
-router.get('/users/hist', isAuthenticated, async(req, res) => {
-    const archivos = await FileRemmaq.find({ user: req.user.id });
-    res.render('users/historialArchivos.hbs', { archivos });
+router.post('/users/uploadin', isAuthenticated, (req, res) => {
+    res.render('users/datosinamhi.hbs');
 });
 
+router.get('/users/hist', isAuthenticated, async(req, res) => {
+    const archivos = await FileRemmaq.find({ user: req.user.id });
+    console.log(archivos);
+    res.render('users/historialArchivos.hbs', { archivos });
+});
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
