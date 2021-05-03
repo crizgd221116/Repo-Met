@@ -4,48 +4,69 @@
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 1024px;">
         {{#each archivos}}
-            <div class="card card-carrera">
-                <div class="card-body">
-                    <h4 class="card-title" style="color: #2e8a9b ;">Título: {{tituloArchivo}}</h4>
-                    
-                    <p class="card-text"> Archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.
-                    </p>
-                    <p class="card-text">
-                        
-                        <!---Autor: <a href="" style="color: black;">{{user.name}}</a>-->
-                        
-                        | Origen: <a href="" style="color: black;"> {{origen}}</a>
-                        | Magnitud: <a href="" style="color: black;">{{magnitud}} </a>
-                        | Estaciones: <a href="" style="color: black;">{{nombreestaciones}} </a>
-                        | Descripción: <a href="" style="color: black;">{{description}}</a>
-                    </p>
-                </div>
+        <div class="card card-carrera">
+            <div class="card-body">
+                <h4 class="card-title" style="color: #2e8a9b ;">Título: {{tituloArchivo}}</h4>
 
+                <p class="card-text"> Archivos de la Red Metropolitana de Monitoreo Atmosférico de Quito.
+                </p>
+                <p class="card-text">
+
+                    <!---Autor: <a href="" style="color: black;">{{user.name}}</a>-->
+
+                    | Origen: <a href="" style="color: black;"> {{origen}}</a>
+                    | Magnitud: <a href="" style="color: black;">{{magnitud}} </a>
+                    | Estaciones: <a href="" style="color: black;">{{nombreestaciones}} </a>
+                    | Descripción: <a href="" style="color: black;">{{description}}</a>
+                </p>
             </div>
+
+        </div>
         <br>
+
         {{/each}}
 
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+
+        <div class="row">
+
+            {{#if pages}}
+            <nav class="mx-auto">
+                <ul class="pagination">
+                    <!--Primera Pagina-->
+                    {{#if (eq current 1)}}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link">First Page</a>
+                        <!--PRIMERA PAGINA-->
+                    </li>
+                    {{else}}
+                    <li class="page-item">
+                        <a href="/users/hist/1" class="page-link">First Page</a>
+                    </li>
+                    {{/if}}
+
+                    <!--PÁGINAS INTERMEDIAS-->
+                    {{{ap current pages}}}
+
+
+                    <!--ULTIMA-->
+                    {{#if (eq current pages)}}
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link">last Page</a>
+
+                    </li>
+                    {{else}}
+                    <li class="page-item">
+                        <a href="/users/hist/{{pages}}" class="page-link">Last Page</a>
+                    </li>
+                    {{/if}}
+
+                </ul>
+            </nav>
+
+            {{/if}}
+
+
+
+
+        </div>
     </div>
-       
-    </div>
-    
-</div>

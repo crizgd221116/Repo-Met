@@ -7,7 +7,7 @@ const fs = require('fs');
 /*const moment = require('moment');
 moment.locale('es');
 */
-const XLSX=require('xlsx');
+const XLSX = require('xlsx');
 
 const User = require('../models/User');
 const FileRemmaq = require('../models/FilesRemmaq');
@@ -78,12 +78,6 @@ router.get('/users/uploadrem', isAuthenticated, (req, res) => {
     res.render('users/datosremmaq.hbs');
 });
 
-const{
-    leerDatos,
-}= require('../controllers/readFileController');
-router.get('/users/uploadrem', isAuthenticated, (req, res) => {
-    res.render('users/resumentablaremmaq.hbs');
-});
 router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
     const { tituloArchivo, origen, magnitud, description } = req.body;
     let newFileRemmaq = new FileRemmaq({ tituloArchivo, origen, magnitud, description });
@@ -150,6 +144,29 @@ router.get('/users/hist', isAuthenticated, async(req, res) => {
     console.log(archivos);
     res.render('users/historialArchivos.hbs', { archivos });
 });
+router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
+    let perPage = 10;
+    let page = req.params.page || 1;
+
+    const archivos = await FileRemmaq.find({ user: req.user.id })
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec((err, archivos) => {
+            FileRemmaq.count((err, count) => {
+                if (err) return next(err);
+                res.render('users/historialArchivos.hbs', {
+                    archivos,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
+                });
+
+            })
+        })
+
+});
+
+
+
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
