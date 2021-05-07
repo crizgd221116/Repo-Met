@@ -111,10 +111,14 @@ router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
     numeroRegistros = xlData.length;
     req.body.numregistros = numeroRegistros;
 
+    var path=req.file.path;
+
     newFileRemmaq.user = req.user.id;
     newFileRemmaq.nombreestaciones = nombreEstaciones;
     newFileRemmaq.fechainicio = dateleft;
     newFileRemmaq.fechafin = datefin;
+    newFileRemmaq.path = path;
+
     await newFileRemmaq.save();
 
     res.render('users/resumentablaremmaq.hbs', { datosRemmaq: req.body });
@@ -130,11 +134,19 @@ router.get('/users/uploadin', isAuthenticated, (req, res) => {
 });
 router.post('/users/uploadin', isAuthenticated, (req, res) => {
     var fs = require("fs");
+    const readline = require("readline");
     fs.readFile(`${req.file.path}`,'utf8',function (err,data) {
         if (err) {
             console.log(err);
         } else {
+           // console.log(data.to);
             console.log(typeof(data));
+            let lector = readline.createInterface({
+                         input: fs.createReadStream(`${req.file.path}`)
+                         });
+                lector.on("line", linea => {
+                         console.log("Tenemos una línea:", linea[1]);
+                         });
         }
     })
 
