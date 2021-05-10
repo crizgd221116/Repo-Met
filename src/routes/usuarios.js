@@ -80,8 +80,8 @@ router.get('/users/uploadrem', isAuthenticated, (req, res) => {
 });
 
 router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
-    const { tituloArchivo, origen, magnitud, description} = req.body;
-    let newFileRemmaq = new FileRemmaq({ tituloArchivo, origen, magnitud, description});
+    const { tituloArchivo, origen, magnitud, description } = req.body;
+    let newFileRemmaq = new FileRemmaq({ tituloArchivo, origen, magnitud, description });
     console.log( /*newFileRemmaq*/ req.file.path);
 
     // 
@@ -111,7 +111,7 @@ router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
     numeroRegistros = xlData.length;
     req.body.numregistros = numeroRegistros;
 
-    var path=req.file.path;
+    var path = req.file.path;
 
     newFileRemmaq.user = req.user.id;
     newFileRemmaq.nombreestaciones = nombreEstaciones;
@@ -134,34 +134,33 @@ router.get('/users/uploadin', isAuthenticated, (req, res) => {
 });
 router.post('/users/uploadin', isAuthenticated, (req, res) => {
     var fs = require("fs");
-    const readline = require("readline");
-    fs.readFile(`${req.file.path}`,'utf8',function (err,data) {
+    fs.readFile(`${req.file.path}`, 'utf8', function(err, data) {
         if (err) {
             console.log(err);
         } else {
-           // console.log(data.to);
+            // console.log(data.to);
             console.log(typeof(data));
             let lector = readline.createInterface({
-                         input: fs.createReadStream(`${req.file.path}`)
-                         });
-                lector.on("line", linea => {
-                         console.log("Tenemos una línea:", linea[1]);
-                         });
+                input: fs.createReadStream(`${req.file.path}`)
+            });
+            lector.on("line", linea => {
+                console.log("Tenemos una línea:", linea[1]);
+            });
         }
     })
 
 
     //     const readline = require("readline"),
-//     fs = require("fs"),
-//     NOMBRE_ARCHIVO = 'uploads/inhami.txt';
+    //     fs = require("fs"),
+    //     NOMBRE_ARCHIVO = 'uploads/inhami.txt';
 
-//     let lector = readline.createInterface({
-//     input: fs.createReadStream(NOMBRE_ARCHIVO)
-// });
+    //     let lector = readline.createInterface({
+    //     input: fs.createReadStream(NOMBRE_ARCHIVO)
+    // });
 
-// lector.on("line", linea => {
-//     console.log("Tenemos una línea:", linea);
-// });
+    // lector.on("line", linea => {
+    //     console.log("Tenemos una línea:", linea);
+    // });
     res.send('cargado');
 });
 
@@ -175,6 +174,7 @@ router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
     let page = req.params.page || 1;
 
     await FileRemmaq.find({ user: req.user.id })
+        .sort({ _id: -1 })
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, archivos) => {
@@ -190,7 +190,8 @@ router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
                 });
 
             });
-        });
+        })
+
 
 });
 
