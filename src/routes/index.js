@@ -4,9 +4,10 @@ const { ensureAuthenticated } = require('../config/checkAuth')
 const FileRemmaq = require('../models/FilesRemmaq');
 
 router.get('/', async(req, res) => {
-    const allfiles = await FileRemmaq.find();
+    const allfiles = await FileRemmaq.find()
+        .sort({ _id: -1 });
     //console.log(allfiles);
-    res.render('index.hbs',{allfiles});
+    res.render('index.hbs', { allfiles });
 });
 router.get('/about', (req, res) => {
     res.render('about.hbs');
