@@ -88,7 +88,7 @@ router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
     var workbook = XLSX.readFile(`${req.file.path}`, { type: 'binary', cellText: false, cellDates: true });
 
     var sheet_name_list = workbook.SheetNames;
-    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]], { header: 1, raw: false, dateNF: 'yyyy-mm-dd HH:mm:ss' });
+    var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]], { header: 1, raw: false, dateNF: 'yyyy-mm-dd' });
     //Cantidad de registros en el archivo
     numestaciones = xlData.length;
     req.body.numestaciones = numestaciones;
@@ -105,7 +105,7 @@ router.post('/users/uploadrem', isAuthenticated, async(req, res) => {
 
     // Nombre de estaciones
     var estaciones = xlData[0].filter((estacion) => estacion != null) + '';
-    var nombreEstaciones = estaciones.split(",").toString();
+    var nombreEstaciones = estaciones.split(", ").toString();
     req.body.estacionesname = nombreEstaciones;
 
     numeroRegistros = xlData.length;
@@ -201,7 +201,7 @@ function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/');
+    res.redirect('/index/1');
 }
 
 module.exports = router;

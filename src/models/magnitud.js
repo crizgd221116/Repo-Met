@@ -1,6 +1,6 @@
 const magnitud = new mongoose.Schema({
-    magnitud: { type: String},
-    });
+    nombre_magnitud: { type: String },
+});
 
 const magnitudes = mongoose.model('magnitud', magnitud);
 
