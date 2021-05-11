@@ -13,15 +13,19 @@
     <!------ Include the above in your HEAD tag ---------->
 </head>
 
-
-<nav class="navbar navbar-expand-lg" style="background-color: #2e8a9b;">
+<nav class="navbar navbar-expand-md" style="background-color: #2e8a9b;">
     <div class="container">
-        <div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px;">            
-                <form action="">
+        <div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px;">
+            <form action="">
                 <select class="js-example-responsive" multiple="multiple" style="width: 1024px;">
-                    <option value="AL">Belisario</option>
-                    <option value="WY">UPS</option>
-                    <option value="WY">Alameda</option>
+                    <optgroup label="Institución">
+                        <option value="Inamhi">INAMHI</option>
+                        <option value="Remmaq">REMMAQ</option>
+                    </optgroup>
+                    <optgroup label="Estación">
+                        <option value="AL">Belisario</option>
+                        <option value="WY">UPS</option>
+                        <option value="WY">Alameda</option>
                     </optgroup>
                     <optgroup label="Magnitud">
                         <option value="WY">Temperatura</option>
@@ -34,41 +38,39 @@
                 <script>
                     $(document).ready(function () {
                         $('.js-example-responsive').select2({
-                            
                             placeholder: "Buscar"
-                            
+
                         });
                     });
                 </script>
             </form>
 
-                  
+
         </div>
-        </div>
-    
+    </div>
+
 
 </nav>
 
-
 <div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 60%;">
-
-    
 
 
     {{#each allfiles}}
     <div class="card">
         <div class="card-body">
             <h4 class="card-title" style="color: #2e8a9b ;">{{tituloArchivo}}</h4>
-            <p class="card-text">Archivo subido: {{date}}
+            <p class="card-text"><a style="font-weight: bold;">Archivo Subido:</a> {{date}}
             </p>
             <p class="card-text">
-                Autor: <a href="" style="color: black;"> </a>
-                | Origen: <a href="" style="color: black;"> {{origen}}</a>
-                | Estación: <a href="" style="color: black;"> {{nombreestaciones}}</a>
-                | Magnitud: <a href="" style="color: black;"> {{magnitud}}</a>
+                <a style="font-weight: bold;">Autor:</a><a href="" style="color: black;"> </a>
+                | <a style="font-weight: bold;">Origen:</a> <a href="" style="color: black;"> {{origen}}</a>
+                | <a style="font-weight: bold;">Estación: </a> <a href="" style="color: black;">
+                    {{nombreestaciones}}</a>
+                | <a style="font-weight: bold;">Magnitud:</a> <a href="" style="color: black;"> {{magnitud}}</a>
             </p>
 
-            <p class="card-text">Desde: {{fechainicio}} - Hasta: {{fechafin}}</p>
+            <p class="card-text"> <a style="font-weight: bold;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
+            </p>
             <button class="btn-primary">CSV</button>
             <button class="btn-success">XLS</button>
             <button class="btn-secondary">Original</button>
@@ -76,25 +78,35 @@
     </div>
     </br>
     {{/each}}
+    <div class="row">
+
+            {{#if pages}}
+            <nav class="mx-auto">
+                <ul class="pagination">
+                    <!--Primera Pagina-->
+                    {{{pgi page}}}
+
+                    <!--PÁGINAS INTERMEDIAS-->
+                    {{{api page pages}}}
+
+
+                    <!--ULTIMA-->
+                    {{{lpi page pages}}}
+
+
+
+                </ul>
+                <h6 class="text-center" style="color: #2e8a9b;">Páginas encontradas: {{pages}}</h6>
+            </nav>
+
+            {{/if}}
+
+
+
+
+        </div>
+
+
     </br>
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
 </div>

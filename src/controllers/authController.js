@@ -53,7 +53,7 @@ exports.registerHandle = (req, res) => {
                 console.log(1)
 
                 oauth2Client.setCredentials({
-                    refresh_token: "1//04HSIph3MovVKCgYIARAAGAQSNwF-L9IrhwE-KEWGXUneceDMqR7OL2TdxGnFdqEDYSPp4NtxcwXLxMcbRtCa46YnouDVmVj4KhU"
+                    refresh_token: "1//040lSyddpWg3rCgYIARAAGAQSNwF-L9IrzD0aqFvM5iVwvwqd_IQYRuDfxgVOonDNEFLjy1XGkjuuDcT9sbPbhKA1yHcDHfrb6lc"
                 });
 
                 console.log(2)
@@ -260,7 +260,7 @@ exports.registerHandle = (req, res) => {
                         user: "repometquito@gmail.com",
                         clientId: "1443120397-d6qgl41bfq45n0flhhfmvr9fkl6lo2ti.apps.googleusercontent.com",
                         clientSecret: "kC_x2z4Zxm4T1VBledyz4hkh",
-                        refreshToken: "1//04HSIph3MovVKCgYIARAAGAQSNwF-L9IrhwE-KEWGXUneceDMqR7OL2TdxGnFdqEDYSPp4NtxcwXLxMcbRtCa46YnouDVmVj4KhU",
+                        refreshToken: "1//040lSyddpWg3rCgYIARAAGAQSNwF-L9IrzD0aqFvM5iVwvwqd_IQYRuDfxgVOonDNEFLjy1XGkjuuDcT9sbPbhKA1yHcDHfrb6lc",
                         accessToken: accessToken
                     },
                 });
@@ -378,7 +378,7 @@ exports.forgotPassword = (req, res) => {
                 );
 
                 oauth2Client.setCredentials({
-                    refresh_token: "1//04HSIph3MovVKCgYIARAAGAQSNwF-L9IrhwE-KEWGXUneceDMqR7OL2TdxGnFdqEDYSPp4NtxcwXLxMcbRtCa46YnouDVmVj4KhU"
+                    refresh_token: "1//040lSyddpWg3rCgYIARAAGAQSNwF-L9IrzD0aqFvM5iVwvwqd_IQYRuDfxgVOonDNEFLjy1XGkjuuDcT9sbPbhKA1yHcDHfrb6lc"
                 });
                 const accessToken = oauth2Client.getAccessToken()
 
@@ -584,17 +584,17 @@ exports.forgotPassword = (req, res) => {
                             service: 'gmail',
                             auth: {
                                 type: "OAuth2",
-                                user: "nodejsa@gmail.com",
-                                clientId: "173872994719-pvsnau5mbj47h0c6ea6ojrl7gjqq1908.apps.googleusercontent.com",
-                                clientSecret: "OKXIYR14wBB_zumf30EC__iJ",
-                                refreshToken: "1//04T_nqlj9UVrVCgYIARAAGAQSNwF-L9IrGm-NOdEKBOakzMn1cbbCHgg2ivkad3Q_hMyBkSQen0b5ABfR8kPR18aOoqhRrSlPm9w",
+                                user: "repometquito@gmail.com",
+                                clientId: "1443120397-d6qgl41bfq45n0flhhfmvr9fkl6lo2ti.apps.googleusercontent.com",
+                                clientSecret: "kC_x2z4Zxm4T1VBledyz4hkh",
+                                refreshToken: "1//040lSyddpWg3rCgYIARAAGAQSNwF-L9IrzD0aqFvM5iVwvwqd_IQYRuDfxgVOonDNEFLjy1XGkjuuDcT9sbPbhKA1yHcDHfrb6lc",
                                 accessToken: accessToken
                             },
                         });
 
                         // send mail with defined transport object
                         const mailOptions = {
-                            from: '"Repo Admin" <nodejsa@gmail.com>', // sender address
+                            from: '"Repo Admin" <repometquito@gmail.com>', // sender address
                             to: email, // list of receivers
                             subject: "Restablecimiento de contraseña: Repositorio Meteorológico ✔", // Subject line
                             html: output, // html body
@@ -712,6 +712,6 @@ exports.loginHandle = (req, res, next) => {
 exports.logoutHandle = (req, res) => {
     req.logout();
     req.flash('success_msg', 'se ha cerrado sesión');
-    res.redirect('/');
+    res.redirect('/index/1');
 
 }
