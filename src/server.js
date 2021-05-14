@@ -32,7 +32,7 @@ mongoose.connect('mongodb+srv://striker19:vmnGW4al2a0j55ah@repositorio.7ffg8.mon
     .catch(err => console.error(err));
 
 //------------ Settings ------------//
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 5000);
 app.set('views', path.join(__dirname, 'views'));
 
 
