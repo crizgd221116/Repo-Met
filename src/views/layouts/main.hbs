@@ -17,18 +17,16 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
-<!-- Importacion de Select2 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <link href="path/to/select2.min.css" rel="stylesheet" />
-    <script src="path/to/select2.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
     integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-repo">
-    <a class="navbar-brand" href="/">
+  
+  <nav class="navbar navbar-expand-md navbar-repo" style="width: 100%;">
+    <a class="navbar-brand" href="/index/1">
       <img src="/images/clima.png" height="54" alt="repositorio">
       <h4> Repositorio Meteorológico</h3>
     </a>
@@ -56,12 +54,6 @@
     </div>
 
 
-    <!--<form class="form-inline" style="justify-content: space-between;">
-      <a href="/users/signin" class="btn btn btn-outline-info my-2 my-sm-0" style="margin-right:5px;color: white;"
-        type="submit">Iniciar sesión</a>
-      <a href="/users/register" class="btn btn btn-outline-info my-2 my-sm-0" type="submit"
-        style="color: white;">Registrarse</a>
-    </form>-->
   </nav>
   {{> messages }}
   {{{body}}}
@@ -73,7 +65,7 @@
 
 </body>
 
-<footer id="sticky-footer" class="py-3 bg-dark text-white-50 fixed-bottom" ">
+<footer id="sticky-footer" class="py-2 bg-dark text-white-50 fixed-bottom" >
   <div class=" container text-center">
   <small style="font-size: medium;">Desarrollado por Estudiantes de la Universidad Politécnica Salesiana <img
       src="/images/footerimage.png" width="30px" style="margin-left: 5px;" alt="ups"></small>
