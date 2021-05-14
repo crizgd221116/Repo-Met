@@ -179,26 +179,36 @@ router.get("/users/archivosRemmaq", isAuthenticated, (req, res) => {
 router.get("/users/uploadin", isAuthenticated, (req, res) => {
   res.render("users/datosinamhi.hbs");
 });
-router.post("/users/uploadin", isAuthenticated, (req, res) => {
-  var fs = require("fs");
-  const readline = require("readline");
-    let rl = readline.createInterface({
-    input: fs.createReadStream(`${req.file.path}`),
-  });
+router.post('/users/uploadin', isAuthenticated, (req, res) => {
+    var fs = require("fs");
+    fs.readFile(`${req.file.path}`, 'utf8', function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            // console.log(data.to);
+            console.log(typeof(data));
+            let lector = readline.createInterface({
+                input: fs.createReadStream(`${req.file.path}`)
+            });
+            lector.on("line", linea => {
+                console.log("Tenemos una línea:", linea[1]);
+            });
+        }
+    })
 
-  let line_no = 0;
 
-  // event is emitted after each line
-  rl.on("line", function (line) {
-    line_no++;
-    //console.log(line);
-  });
+    //     const readline = require("readline"),
+    //     fs = require("fs"),
+    //     NOMBRE_ARCHIVO = 'uploads/inhami.txt';
 
-  // end
-  rl.on("close", function (line) {
-    //console.log('Total lines : ' + line_no);
-  });
-  res.send("cargado");
+    //     let lector = readline.createInterface({
+    //     input: fs.createReadStream(NOMBRE_ARCHIVO)
+    // });
+
+    // lector.on("line", linea => {
+    //     console.log("Tenemos una línea:", linea);
+    // });
+    res.send('cargado');
 });
 
 router.get("/users/hist", isAuthenticated, async (req, res) => {
@@ -206,32 +216,37 @@ router.get("/users/hist", isAuthenticated, async (req, res) => {
   console.log(archivos);
   res.render("users/historialArchivos.hbs", { archivos });
 });
-router.get("/users/hist/:page", isAuthenticated, async (req, res, next) => {
-  let perPage = 10;
-  let page = req.params.page || 1;
+router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
+    let perPage = 10;
+    let page = req.params.page || 1;
 
-  await FileRemmaq.find({ user: req.user.id })
-    .skip(perPage * page - perPage)
-    .limit(perPage)
-    .exec((err, archivos) => {
-      FileRemmaq.count({ user: req.user.id }, (err, count) => {
-        if (err) return next(err);
-        console.log(count);
-        console.log(Math.ceil(count / perPage));
-        res.render("users/historialArchivos.hbs", {
-          archivos,
-          page,
-          pages: Math.ceil(count / perPage),
-        });
-      });
-    });
+    await FileRemmaq.find({ user: req.user.id })
+        .sort({ _id: -1 })
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec((err, archivos) => {
+            FileRemmaq.count({ user: req.user.id }, (err, count) => {
+                if (err) return next(err);
+                console.log(count)
+                console.log(Math.ceil(count / perPage))
+                res.render('users/historialArchivos.hbs', {
+                    archivos,
+                    page,
+                    pages: Math.ceil(count / perPage)
+
+                });
+
+            });
+        })
+
+
 });
 
 function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/");
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/index/1');
 }
 
 module.exports = router;

@@ -1,10 +1,11 @@
 <head>
-    <script>
-    $(document).ready(function(){
-        $('#exampleModal').modal('show')
+  <script>
+    $(document).ready(function () {
+      $('#exampleModal').modal('show')
 
     });
-</script>
+  </script> 
+
 </head>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -18,13 +19,14 @@
       <div class="modal-body">
         <form>
           <div class="form-group">
-            <p for="recipient-name" class="col-form-label">El archivo que usted debe subir en esta opcion debe estar como en el formato de la imagen <b>primera fila estaciones y primera columna fechas </b></b>
-            <h3>!Recuerde!</h3>La extensión del archivo debe ser .xls o .xlsx
-            
+            <p for="recipient-name" class="col-form-label">El archivo que debe subir en esta opcion debe estar con el
+              formato mostrado en la imagen a continuación: <b>primera fila estaciones y primera columna fechas </b></b>
+            <h3>¡Recuerde!</h3>La extensión del archivo debe ser .xls o .xlsx
+
             </p>
           </div>
           <div class="form-group" style="margin-left: auto;">
-            <img src="/images/formatoRemmaq.JPG" alt="formato archivo remmaq">
+            <img src="/images/formatoRemmaq.JPG" alt="formato archivo remmaq" class="responsive">
           </div>
         </form>
       </div>
@@ -34,42 +36,47 @@
     </div>
   </div>
 </div>
+
 <div class="container-fluid">
-    <div class="row">
-        <div class=".col-md-4 col-sm-4 col-xs-12"></div>
-        <div class=".col-md-4 col-sm-4 col-xs-12">
-            <div class="form-title text-center">
-                <h4 style="font-weight: 800;"></h4><img src="/images/remmaq.png" width="128" height="64" alt="REMMAQ">
-            </div>
-            <form class="formulario" action="/users/uploadrem" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">Subir archivo</label>
-                    <input type="file" class="form-control-file" name="archivoremmaq" id="exampleFormControlFile1"
-                        accept=".xlsx,.xls">
-                </div>
-                <div class="form-group">
-                    <label for="origen">Titulo </label>
-                    <input type="text" class="form-control" name="tituloArchivo" value="{{tituloArchivo}}">
-                </div>
-                
-                <div class="form-group">
-                    <label for="origen"> Origen </label>
-                    <input type="text" class="form-control" name="origen" value='REMMAQ{{origen}}' disabled>
-                </div>
-                
-                <div class="form-group">
-                    <label for="magnitud">Magnitud </label>
-                    <input type="text" class="form-control" name="magnitud" value="{{magnitud}}"
-                        placeholder="Ej: Temperatura">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Descripción (Opcional)</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"
-                        value="{{description}}"
-                        placeholder="Breve descripción de los datos a subir incluyendo [mes/año de inicio - mes/año fin]" ></textarea>
-                </div>
-                <a href="">Añadir Metadatos</a>
-                <button type=" submit" class="btn btn-primary btn-block">Aceptar</button>
-            </form>
+  <div class="row">
+    <div class=".col-md-4 col-sm-4 col-xs-12"></div>
+    <div class=".col-md-4 col-sm-4 col-xs-12">
+      <div class="form-title text-center">
+        <h4 style="font-weight: 800;"></h4><img src="/images/remmaq.png" width="128" height="64" alt="REMMAQ">
+      </div>
+      <form class="formulario" action="/users/uploadrem" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="exampleFormControlFile1">Subir archivo</label>
+          <input type="file" class="form-control-file" name="archivoremmaq" id="exampleFormControlFile1"
+            accept=".xlsx,.xls">
+        </div>
+        <div class="form-group">
+          <label for="origen">Titulo </label>
+          <input type="text" class="form-control" name="tituloArchivo" value="{{tituloArchivo}}">
+        </div>
+
+        <div class="form-group">
+          <label for="origen"> Origen </label>
+          <input type="text" class="form-control" name="origen" value='REMMAQ{{origen}}' disabled>
+        </div>
+
+        <div class="form-group">
+          <label for="magnitud">Magnitud </label>
+          <input type="text" class="form-control" name="magnitud" value="{{magnitud}}" placeholder="Ej: Temperatura">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Descripción (Opcional)</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"
+            value="{{description}}"
+            placeholder="Breve descripción de los datos a subir incluyendo [mes/año de inicio - mes/año fin]"></textarea>
+        </div>
+        <center>
+          <a style="cursor:pointer; font-style: italic; color:#30475e ;" ><u>Añadir
+              Metadatos</u></a>                       
+        </center>
+        <br>
+        <button type="submit" class="btn btn-primary btn-block">Aceptar</button>
+      </form>      
     </div>
-</div>
+  </div>
+  

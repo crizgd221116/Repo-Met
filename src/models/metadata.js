@@ -1,6 +1,6 @@
 const metadata = new mongoose.Schema({
-    metadata: { type: String},
-    });
+    metadata: { type: String },
+});
 
 const metadatos = mongoose.model('metadatos', metadata);
 

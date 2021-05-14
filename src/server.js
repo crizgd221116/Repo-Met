@@ -113,7 +113,59 @@ app.engine('.hbs', exphbs({
                 return val
 
             } else {
-                let val = '<li class="page-item "><a href="/users/hist/' + pages + '" class="page-link">Última Página</a></li>'
+                let val = '<li class="page-item "><a href="/users/hist/' + pages + '" class="page-link">Última Pagina</a></li>'
+                return val
+            }
+
+        },
+        pgi: function(page) {
+            if (page == 1) {
+                let val = '<li class="page-item disabled"><a href="#" class="page-link">Primera Pagina</a></li>'
+                return val
+            } else {
+                let val = '<li class="page-item"> <a href="/index/1" class="page-link">Primera Página</a></li>'
+
+                return val
+            }
+
+
+
+        },
+        api: function(page, pages) {
+            var list = []
+            var i = (Number(page) > 5 ? Number(page) - 4 : 1)
+            if (i !== 1) {
+                var li1 = '<li class="page-item disabled"><a class="page-link" href="#">....</a></li>';
+                list.push(li1);
+
+            }
+            for (; i <= (Number(page) + 4) && i <= pages; i++) { //for por cada pagina
+                if (i == page) {
+                    var li1 = '<li class="page-item active"><a href="' + i + '" class="page-link">' + i + '</a></li>';
+                    list.push(li1)
+
+                } else {
+                    var li1 = '<li class="page-item"><a href="/index/' + i + '" class="page-link">' + i + '</a></li>'
+                    list.push(li1)
+
+                }
+                if (i == Number(page) + 4 && i < pages) {
+                    var li1 = '<li class = "page-item disabled"><a class="page-link" href="#" >...</a></li>'
+                    list.push(li1)
+
+                }
+
+            } //cierre del for
+            var lista = list.join("")
+            return lista
+        }, //cierre de la funcio
+        lpi: function(page, pages) {
+            if (page == pages) {
+                let val = '<li class="page-item disabled"><a href="" class="page-link">Última Página</a></li>'
+                return val
+
+            } else {
+                let val = '<li class="page-item "><a href="/index/' + pages + '" class="page-link">Última Pagina</a></li>'
                 return val
             }
 
