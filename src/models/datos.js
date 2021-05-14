@@ -1,8 +1,14 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose
 const dato = new mongoose.Schema({
-    fecha: { type: Date},
+    fecha: { type: String},
     valor: { type: String},
-    codigoEncabezado: { type: String },
-    codigoMagnitud:{type:String}
+    codigoMagnitud:{type:String},
+    pertenece:{type:String},
+    encabezado: {
+        type: Schema.Types.ObjectId,
+        ref: 'encabezado',
+      }
     });
 
 const datos = mongoose.model('datos', dato);
