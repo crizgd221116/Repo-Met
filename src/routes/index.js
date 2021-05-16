@@ -13,8 +13,8 @@ router.get('/index/:page', async(req, res, next) => {
         .exec((err, allfiles) => {
             FileRemmaq.count({}, (err, count) => {
                 if (err) return next(err);
-                console.log(count)
-                console.log(Math.ceil(count / perPage))
+                // console.log(count)
+                // console.log(Math.ceil(count / perPage))
                 res.render('index.hbs', {
                     allfiles,
                     page,
