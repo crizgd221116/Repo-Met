@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 //------------ Files Remmaq Schema ------------//
 const FileRemmaqSchema = new mongoose.Schema({
-    tituloArchivo: { type: String},
+    tituloArchivo: { type: String,uppercase:true},
     origen: { type: String,default:"REMMAQ"},
     magnitud: { type: String},
     description: { type: String,default:'Sin descripcion'},

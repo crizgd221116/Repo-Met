@@ -1,33 +1,38 @@
-
-    <div class="container-fluid">
-        <div class="row ">
-            <div class=".col-md-4 col-sm-4 col-xs-12"></div>
-            <div class=".col-md-4 col-sm-4 col-xs-12">
-                <div class="form-title text-center">
-                    <h4 style="font-weight: 800;"></h4> <img src="/images/inamhi.png" width="128" height="64" alt="INAMHI">
-                </div>
-                <form class="formulario" action="/users/uploadin" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Subir archivo</label>
-                        <input type="file" class="form-control-file" name="archivoremmaq" id="exampleFormControlFile1" accept=".txt">
-                    </div>
-                    {{!-- <div class="form-group">
-                        <label for="origen">Titulo </label>
-                        <input type="text" class="form-control" id="titulo">
-                    </div>
-                    <div class="form-group">
-                        <label for="origen">Origen </label>
-                        <input type="text" class="form-control" id="origen" value="INAMHI" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="magnitud">Estación </label>
-                        <input type="text" class="form-control" id="magnitud">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Descripción</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div> --}}
-                    <button type=" submit" class="btn btn-primary btn-block">Aceptar</button>
-                </form>
+<div class="container-fluid">
+    <div class="row ">
+        <div class=".col-md-4 col-sm-4 col-xs-12"></div>
+        <div class=".col-md-4 col-sm-4 col-xs-12">
+            <div class="form-title text-center">
+                <h4 style="font-weight: 800;"></h4> <img src="/images/inamhi.png" width="128" height="64" alt="INAMHI">
             </div>
+            <form class="formulario" action="/users/uploadin" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Subir archivo</label>
+                    <input type="file" class="form-control-file" name="archivoremmaq" id="exampleFormControlFile1"
+                        accept=".txt">
+                </div>
+                <div class="form-group">
+                    <label for="origen">Titulo </label>
+                    <input type="text" class="form-control" name="tituloArchivo" value="{{tituloArchivo}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="origen"> Origen </label>
+                    <input type="text" class="form-control" name="origen" value='REMMAQ{{origen}}' disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="magnitud">Magnitud </label>
+                    <input type="text" class="form-control" name="magnitud" value="{{magnitud}}"
+                        placeholder="Ej: Temperatura">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descripción (Opcional)</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"
+                        value="{{description}}"
+                        placeholder="Breve descripción de los datos a subir incluyendo [mes/año de inicio - mes/año fin]"></textarea>
+                </div>
+                <button type=" submit" class="btn btn-primary btn-block">Aceptar</button>
+            </form>
         </div>
+    </div>

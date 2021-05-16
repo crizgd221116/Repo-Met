@@ -169,47 +169,47 @@ router.post("/users/uploadrem", isAuthenticated, async (req, res) => {
   });
 
 
-  res.render("users/resumentablaremmaq.hbs", { datosRemmaq: req.body });
+  res.render("users/resumentabladatos.hbs", { datosResumen: req.body });
 });
 
 router.get("/users/archivosRemmaq", isAuthenticated, (req, res) => {
   res.render("users/archivosMetereologicos.hbs");
 });
 //INHAMI
-router.get("/users/uploadin", isAuthenticated, (req, res) => {
-  res.render("users/datosinamhi.hbs");
-});
-router.post('/users/uploadin', isAuthenticated, (req, res) => {
-    var fs = require("fs");
-    fs.readFile(`${req.file.path}`, 'utf8', function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            // console.log(data.to);
-            console.log(typeof(data));
-            let lector = readline.createInterface({
-                input: fs.createReadStream(`${req.file.path}`)
-            });
-            lector.on("line", linea => {
-                console.log("Tenemos una línea:", linea[1]);
-            });
-        }
-    })
+// router.get("/users/uploadin", isAuthenticated, (req, res) => {
+//   res.render("users/datosinamhi.hbs");
+// });
+// router.post('/users/uploadin', isAuthenticated, (req, res) => {
+//     var fs = require("fs");
+//     fs.readFile(`${req.file.path}`, 'utf8', function(err, data) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             // console.log(data.to);
+//             console.log(typeof(data));
+//             let lector = readline.createInterface({
+//                 input: fs.createReadStream(`${req.file.path}`)
+//             });
+//             lector.on("line", linea => {
+//                 console.log("Tenemos una línea:", linea[1]);
+//             });
+//         }
+//     })
 
 
-    //     const readline = require("readline"),
-    //     fs = require("fs"),
-    //     NOMBRE_ARCHIVO = 'uploads/inhami.txt';
+//     //     const readline = require("readline"),
+//     //     fs = require("fs"),
+//     //     NOMBRE_ARCHIVO = 'uploads/inhami.txt';
 
-    //     let lector = readline.createInterface({
-    //     input: fs.createReadStream(NOMBRE_ARCHIVO)
-    // });
+//     //     let lector = readline.createInterface({
+//     //     input: fs.createReadStream(NOMBRE_ARCHIVO)
+//     // });
 
-    // lector.on("line", linea => {
-    //     console.log("Tenemos una línea:", linea);
-    // });
-    res.send('cargado');
-});
+//     // lector.on("line", linea => {
+//     //     console.log("Tenemos una línea:", linea);
+//     // });
+//     res.send('cargado');
+// });
 
 router.get("/users/hist", isAuthenticated, async (req, res) => {
   const archivos = await FileRemmaq.find({ user: req.user.id });
@@ -227,8 +227,8 @@ router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
         .exec((err, archivos) => {
             FileRemmaq.count({ user: req.user.id }, (err, count) => {
                 if (err) return next(err);
-                console.log(count)
-                console.log(Math.ceil(count / perPage))
+                // console.log(count)
+                // console.log(Math.ceil(count / perPage))
                 res.render('users/historialArchivos.hbs', {
                     archivos,
                     page,
