@@ -28,7 +28,7 @@ router.post('/users/uploadin', isAuthenticated, (req, res) => {
         req.body.numregistros=file.lecturas.length;
         req.body.firstdate=file.fechaInicio;
         req.body.lastdate=file.fechafin;
-        res.render('users/resumentablaremmaq.hbs',{datosResumen: req.body})
+        res.render('users/resumentabladatos.hbs',{datosResumen: req.body})
     });
 });
 
