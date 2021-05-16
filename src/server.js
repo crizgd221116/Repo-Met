@@ -76,8 +76,6 @@ app.engine('.hbs', exphbs({
                 return val
             }
 
-
-
         },
         ap: function(page, pages) {
             var list = []

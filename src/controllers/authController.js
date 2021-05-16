@@ -4,8 +4,8 @@ const nodemailer = require('nodemailer');
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const jwt = require('jsonwebtoken');
-const JWT_KEY = "jwtactive987";
-const JWT_RESET_KEY = "jwtreset987";
+const JWT_KEY = "jwtactmet22";
+const JWT_RESET_KEY = "jwtresmet22";
 
 //------------ Modelo Usuario ------------//
 const User = require('../models/User');
@@ -28,7 +28,7 @@ exports.registerHandle = (req, res) => {
         console.log("las contraseñas no coinciden")
         req.flash("error_msg", "las contraseñas no coinciden");
         res.redirect('/users/register');
-
+        //-------- Número de caracteres de la contraseña------//
 
     }
     if (password.length < 8) {
@@ -386,7 +386,7 @@ exports.forgotPassword = (req, res) => {
                 const CLIENT_URL = 'http://' + req.headers.host;
                 const output = `
                 
-                <p><b>NOTA: </b> El enlace caduca en 3 minutos.</p>
+                
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -498,7 +498,7 @@ exports.forgotPassword = (req, res) => {
                             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" >
                                 <tr>
                                     <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                                    <h1 style="font-size: 48px; font-weight: 400; margin: 0;">¡Hola!</h1>
+                                    <h2 style="font-size: 48px; font-weight: 400; margin: 0;">¡Hola!</h2>
                                     </td>
                                 </tr>
                             </table>
@@ -521,9 +521,13 @@ exports.forgotPassword = (req, res) => {
                             <!-- COPY -->
                             <tr>
                                 <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
-                                <p style="margin: 0;">Ha solicitado un cambio de contraseña en el Repositorio de Datos Meteorológicos. Por favor, presione el botón a continuación:</p>
+                                <p style="margin: 0;">Ha solicitado un cambio de contraseña en el Repositorio de Datos Meteorológicos. Por favor, presione el botón a continuación.</p>
+                                <p style="margin: 0;">NOTA: el enlace caduca en 5 minutos.</p>
+                                
                                 </td>
-                            </tr>
+                            </tr>                           
+                            
+                            
                             <!-- BULLETPROOF BUTTON -->
                             <tr>
                                 <td bgcolor="#ffffff" align="left">
@@ -540,6 +544,7 @@ exports.forgotPassword = (req, res) => {
                                 </table>
                                 </td>
                             </tr>
+
                             <!-- COPY -->
                             <tr>
                                 <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
@@ -571,7 +576,7 @@ exports.forgotPassword = (req, res) => {
                     
                     
                 </table>
-                    
+                
                 </body>
                 </html>
                 `;
