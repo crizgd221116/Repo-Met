@@ -9,28 +9,28 @@ function isAuthenticated(req, res, next) {
     res.redirect('/index/1');
 }
 
-router.get("/users/uploadin", isAuthenticated, (req, res) => {
-    res.render("users/datosinamhi.hbs");
+router.get("/users/uploadrem", isAuthenticated, (req, res) => {
+    res.render("users/datosremmaq.hbs");
 });
 
-
-router.post('/users/uploadin', isAuthenticated, (req, res) => {
-
+router.post("/users/uploadrem", isAuthenticated, async (req, res) => {
     const fileControllerInstance = new fileController();
-    fileControllerInstance.ReadTxtFile(req.file.path, file => {
-        req.body.estacionesname = file.nombreEstaciones;
-        req.body.numregistros = file.lecturas.length;
+    fileControllerInstance.ReadContentXlsFile(req.file.path, file => {
+
+        req.body.numestaciones = file.numEstaciones;
         req.body.firstdate = file.fechaInicio;
         req.body.lastdate = file.fechafin;
+        req.body.estacionesname = file.nombreEstaciones;
+        req.body.numregistros = file.lecturas.length;
         req.body.path = file.path;
         req.body.userid = req.user.id;
-        res.render('users/resumentabladatos.hbs', { datosResumen: req.body })
+        res.render('users/resumenremmaq.hbs', { datosResumen: req.body })
     });
-
 });
-router.post('/users/saveinamhi', isAuthenticated, async (req, res, next) => {
+
+router.post('/users/saveremmaq', isAuthenticated, async (req, res, next) => {
     const fileControllerInstance = new fileController();
-    fileControllerInstance.ReadTxtFile(req.body.path, file => {
+    fileControllerInstance.ReadContentXlsFile(req.body.path, file => {
         file.userId = req.body.userid;
         req.body.estacionesname = file.nombreEstaciones;
         req.body.numregistros = file.lecturas.length;
@@ -38,12 +38,12 @@ router.post('/users/saveinamhi', isAuthenticated, async (req, res, next) => {
         req.body.lastdate = file.fechafin;
         file.tituloArchivo = req.body.tituloArchivo;
         file.descripcion = req.body.description;
-         fileControllerInstance.SaveFile(file);
+        console.log('----guardar----')
+        console.log(file);
+        console.log('----guardar----')
+        fileControllerInstance.SaveFile(file);
         res.render("users/historialArchivos.hbs", { datosResumen: req.body });
     });
 });
 
-// router.get("/users/test", isAuthenticated, (req, res) => {
-//     res.render("users/test.hbs");
-// });
 module.exports = router;
