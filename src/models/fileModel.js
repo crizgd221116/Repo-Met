@@ -1,7 +1,7 @@
 class FileModel {
 
     constructor(userId, nombreEstaciones, fechaInicio, fechafin, path, magnitud,
-        numeroRegistros,descripcion,tituloArchivo,origen,lecturas) {
+        numeroRegistros,descripcion,tituloArchivo,origen,numEstaciones,lecturas) {
         this.userId = userId;
         this.nombreEstaciones = nombreEstaciones;
         this.fechaInicio = fechaInicio;
@@ -12,6 +12,7 @@ class FileModel {
         this.descripcion = descripcion;
         this.tituloArchivo = tituloArchivo;
         this.origen = origen;
+        this.numEstaciones = numEstaciones;
         this.lecturas = lecturas;
 
     }

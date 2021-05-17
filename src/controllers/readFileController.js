@@ -1,12 +1,15 @@
 const FileModel = require("../models/fileModel");
 const readline = require('readline');
 const fs = require('fs');
+const XLSX = require("xlsx");
 
 const Encabezado = require("../models/encabezado");
 const Datos = require("../models/datos");
+
 //Delimitadores
 const CODIGO_FIN_DELIMITADOR = 'CODIGO';
 const CODIGO_INICIO_DELIMITADOR = ':';
+
 class ReadFileController {
     constructor() {
     }
@@ -16,7 +19,6 @@ class ReadFileController {
         let result = new FileModel();
         this.ReadContentTxtFile(filePath, file => {
             result = file;
-            // console.log(result);
             cb(result);
         })
     }
@@ -88,7 +90,7 @@ class ReadFileController {
         encabezado.origen = file.origen;
         encabezado.magnitud = file.magnitud;
         encabezado.description = file.description;
-        
+
 
         encabezado.user = file.userId;
         encabezado.tituloArchivo = file.tituloArchivo;
@@ -117,6 +119,63 @@ class ReadFileController {
                 console.log(error)      // Failure
             });
         });
+    }
+
+    ReadContentXlsFile(filePath, process) {
+
+        let file = new FileModel();
+        var workbook = XLSX.readFile(`${filePath}`, {
+            type: "binary",
+            cellText: false,
+            cellDates: true,
+        });
+
+        var sheet_name_list = workbook.SheetNames;
+        var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]], {
+            header: 1,
+            raw: false,
+            dateNF: "yyyy-mm-dd HH:mm:ss",
+        });
+
+        //Num estaciones
+        file.numEstaciones = xlData.length;
+
+        //Fecha de inicio del archivo
+        var fechainicio = xlData[3] + "";
+        file.fechaInicio = fechainicio.split(",", 1).toString();
+
+        //Fecha de fin del archivo
+        var fechafin = xlData[xlData.length - 1] + "";
+        file.fechafin = fechafin.split(",", 1).toString();
+
+        // Nombre de estaciones
+        var estaciones = xlData[0].filter((estacion) => estacion != null) + "";
+        file.nombreEstaciones = estaciones.split(",").toString();
+
+        //Num registros
+        file.numeroRegistros = xlData.length;
+
+        file.path = filePath;
+
+        const cabecera = xlData[0];
+        const data = [];
+        for (let i = 0; i < xlData.length; i++) {
+            for (let j = 0; j < xlData[i].length; j++) {
+                if (j !== 0) {
+                    if (!isNaN(xlData[i][j])) {
+                        const arreglo = {
+                            fecha: xlData[i][0],
+                            pertenece: cabecera[j],
+                            valor: xlData[i][j],
+                        };
+                        data.push(arreglo);
+                    }
+                }
+            }
+        }
+
+        file.lecturas = data;
+        process(file);
     }
 }
 
