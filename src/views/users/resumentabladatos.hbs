@@ -1,59 +1,64 @@
 <div class="container-fluid">
   <center>
-    <div class=".col-md-4 col-sm-4 col-xs-12">
-      <br>
+    <form action="/users/saveinamhi" method="POST" enctype="multipart/form-data">
+      <div class=".col-md-4 col-sm-4 col-xs-12">
+        <br>
 
 
-      <div class="form-title-res text-center">
-        <h4 style="font-weight: 800;"> Resumen Datos</h4>
-      </div>      
-      <div class="table-responsive">
-        <table class="table table-striped table-hover table-light">
-          <tbody>
-            <tr>
-              <th scope="row" width="40">Título:</th>
-              <td>{{datosResumen.tituloArchivo}}</td>
+        <div class="form-title-res text-center">
+          <h4 style="font-weight: 800;"> Resumen Datos</h4>
+           <input type="hidden" id="custId" name="path" value="{{datosResumen.path}}">
+           <input type="hidden" id="custId" name="tituloArchivo" value="{{datosResumen.tituloArchivo}}">
+           <input type="hidden" id="custId" name="description" value="{{datosResumen.description}}">
+           <input type="hidden" id="custId" name="userid" value="{{datosResumen.userid}}">
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover table-light">
+            <tbody>
+              <tr>
+                <th scope="row" width="40">Título:</th>
+                <td>{{datosResumen.tituloArchivo}}</td>
+              </tr>
+              <tr>
+                <th scope="row" width="40">Estaciones: </th>
+                <td>{{datosResumen.estacionesname}}</td>
+
+              </tr>
+              <tr>
+                <th scope="row" width="40">Fechas:</th>
+
+                <td><b>Desde: </b>{{datosResumen.firstdate}} <br><b>Hasta: </b>{{datosResumen.lastdate}}</td>
 
 
-            </tr>
-            <tr>
-              <th scope="row" width="40">Estaciones: </th>
-              <td>{{datosResumen.estacionesname}}</td>
-
-            </tr>
-            <tr>
-              <th scope="row" width="40">Fechas:</th>
-
-              <td><b>Desde: </b>{{datosResumen.firstdate}} <br><b>Hasta: </b>{{datosResumen.lastdate}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Magnitud:</th>
+                <td>{{datosResumen.magnitud}}</td>
+              </tr>
+              <tr>
+                <th scope="row" style="justify-content: ;">Registros:</th>
 
 
-            </tr>
-            <tr>
-            <th scope="row">Magnitud:</th>
-            <td>{{datosResumen.magnitud}}</td>
-          </tr>
-            <tr>
-              <th scope="row" style="justify-content: ;">Registros:</th>
+                <td>{{datosResumen.numregistros}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Descripción:</th>
+                <td>{{datosResumen.description}}</td>
 
+              </tr>
 
-              <td>{{datosResumen.numregistros}}</td>
-            </tr>
-            <tr>
-            <th scope="row">Descripción:</th>
-            <td>{{datosResumen.description}}</td>
+            </tbody>
 
-          </tr>
-            
-          </tbody>
+          </table>
+        </div>
+        <br>
 
-        </table>
+        <center>
+          <h4 class="display-10">¿Datos correctos?</h4>
+          <button type="submit" class="btn btn-primary btn-lg">Si</button> <a class="btn btn-primary btn-lg"
+            href="/users/uploadrem" role="button">No</a>
+        </center>
       </div>
-      <br>
-      <center>
-        <h4 class="display-10">¿Datos correctos?</h4>
-        <a class="btn btn-primary btn-lg" href="/users/hist/1" role="button">Si</a> <a class="btn btn-primary btn-lg"
-          href="/users/uploadrem" role="button">No</a>
-      </center>
-    </div>
+    </form>
   </center>
 </div>

@@ -10,7 +10,7 @@ moment.locale('es');
 const XLSX = require("xlsx");
 
 const User = require("../models/User");
-const FileRemmaq = require("../models/FilesRemmaq");
+const FileRemmaq = require("../models/encabezado");
 const Datos = require("../models/datos");
 //------------ Importar controladores  ------------//
 const authController = require("../controllers/authController");
@@ -241,6 +241,12 @@ router.get('/users/hist/:page', isAuthenticated, async(req, res, next) => {
 
 
 });
+
+router.post('/users/hist/:page', isAuthenticated, async(req, res, next) => {
+
+  res.render("/users/hist/1", { datosResumen: req.body });
+});
+
 
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {

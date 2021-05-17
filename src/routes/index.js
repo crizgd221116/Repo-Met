@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { ensureAuthenticated } = require('../config/checkAuth')
-const FileRemmaq = require('../models/FilesRemmaq');
+const FileRemmaq = require('../models/encabezado');
 
 router.get('/index/:page', async(req, res, next) => {
     let perPage = 10;
