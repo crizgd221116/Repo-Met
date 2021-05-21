@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const { Schema } = mongoose
 //------------ Files Remmaq Schema ------------//
 const EncabezadoSchema = new mongoose.Schema({
     tituloArchivo: { type: String, uppercase: true },
@@ -11,7 +11,11 @@ const EncabezadoSchema = new mongoose.Schema({
     fechainicio: { type: String },
     fechafin: { type: String },
     path: { type: String },
-    user: { type: String }
+    user: { type: String },
+    metadatos: {
+        type: Schema.Types.ObjectId,
+        ref: 'metadatos',
+      }
 });
 
 const Encabezado = mongoose.model('encabezado', EncabezadoSchema);

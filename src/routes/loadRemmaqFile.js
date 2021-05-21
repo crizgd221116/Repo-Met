@@ -37,6 +37,7 @@ router.post('/users/saveremmaq', isAuthenticated, async (req, res, next) => {
         req.body.firstdate = file.fechaInicio;
         req.body.lastdate = file.fechafin;
         file.tituloArchivo = req.body.tituloArchivo;
+        file.magnitud = req.body.magnitud;
         file.descripcion = req.body.description;
         console.log('----guardar----')
         console.log(file);
