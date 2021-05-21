@@ -7,7 +7,7 @@ const FileRemmaq = require("../models/encabezado");
 //------------ Importar controladores  ------------//
 const authController = require("../controllers/authController");
 const readFileController = require("../controllers/readFileController");
-const datos = require("../models/datos");
+const Datos = require("../models/datos");
 
 //------------ ruta login------------//
 router.get("/users/login", (req, res) => res.render("users/login.hbs"));
@@ -52,6 +52,16 @@ router.get("/users/editinfo/:id", isAuthenticated, async (req, res) => {
   res.render("users/editinfo.hbs", { userAuth });
 });
 
+router.get("/users/viewencabezados/:id", async (req, res) => {
+  const encabezados = await FileRemmaq.findById(req.params.id);
+  const file = encabezados.path;
+  res.download(file);
+});
+router.get("/users/datos/:id", async (req, res) => {
+  const datos = await Datos.find({"encabezado":req.params.id});
+  console.log(datos);
+  res.send("DATOS ENVIADOS :)")
+});
 router.put("/users/editinfo/:id", async (req, res) => {
   const {
     /*genero,titulo,ocupacion,description*/ name,

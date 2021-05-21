@@ -8,13 +8,14 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const uuid = require('uuid').v4;
 //subir archivos
 const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, 'public/uploads'),
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, uuid() + path.extname(file.originalname));
     }
 });
 
@@ -220,6 +221,7 @@ app.use(function(req, res, next) {
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     app.locals.user = req.user;
+    app.locals.encabezados = req.encabezados;
     next();
 });
 //------------ Routes ------------//

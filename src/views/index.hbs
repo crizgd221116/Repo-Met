@@ -62,8 +62,8 @@
             <p class="card-text"><a style="font-weight: bold;">Archivo Subido:</a> {{date}}
             </p>
             <p class="card-text">
-                <a style="font-weight: bold;">Autor:</a><a href="" style="color: black;"> </a>
-                | <a style="font-weight: bold;">Origen:</a> <a href="" style="color: black;"> {{origen}}</a>
+                
+                <a style="font-weight: bold;">Origen:</a> <a href="" style="color: black;"> {{origen}}</a>
                 | <a style="font-weight: bold;">Estación: </a> <a href="" style="color: black;">
                     {{nombreestaciones}}</a>
                 | <a style="font-weight: bold;">Magnitud:</a> <a href="" style="color: black;"> {{magnitud}}</a>
@@ -71,9 +71,9 @@
 
             <p class="card-text"> <a style="font-weight: bold;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
             </p>
-            <button class="btn-primary">CSV</button>
+            <button class="btn-primary" ><a href="/users/datos/{{id}}" style="color: black;">CSV</a></button>
             <button class="btn-success">XLS</button>
-            <button class="btn-secondary">Original</button>
+            <button class="btn-secondary"><a href="/users/viewencabezados/{{id}}" style="color: black;">Original</a></button>
         </div>
     </div>
     </br>
