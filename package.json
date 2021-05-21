@@ -20,6 +20,7 @@
         "express-session": "^1.17.1",
         "googleapis": "^67.1.0",
         "i": "^0.3.6",
+        "json2csv": "^5.0.6",
         "jsonwebtoken": "^8.5.1",
         "just-handlebars-helpers": "^1.0.18",
         "method-override": "^3.0.0",
