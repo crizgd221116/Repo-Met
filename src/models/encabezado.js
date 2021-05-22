@@ -3,7 +3,7 @@ const { Schema } = mongoose
 //------------ Files Remmaq Schema ------------//
 const EncabezadoSchema = new mongoose.Schema({
     tituloArchivo: { type: String, uppercase: true },
-    origen: { type: String, default: "REMMAQ" },
+    origen: { type: String},
     magnitud: { type: String },
     description: { type: String, default: 'Sin descripcion' },
     nombreestaciones: { type: String },
