@@ -9,7 +9,8 @@ const Datos = require("../models/datos");
 //Delimitadores
 const CODIGO_FIN_DELIMITADOR = 'CODIGO';
 const CODIGO_INICIO_DELIMITADOR = ':';
-
+const ORIGEN_REMMAQ ="REMMAQ";
+const ORIGEN_INAMHI ="INAMHI";
 class ReadFileController {
     constructor() {
     }
@@ -25,11 +26,11 @@ class ReadFileController {
 
     ReadContentTxtFile(filePath, process) {
         let file = new FileModel();
+        file.origen = ORIGEN_INAMHI;
         fs.readFile(`${filePath}`, 'utf8', function (err, data) {
             if (err) {
                 console.log(err);
             } else {
-                // console.log(typeof (data));
                 let lector = readline.createInterface({
                     input: fs.createReadStream(`${filePath}`)
                 });
@@ -75,7 +76,6 @@ class ReadFileController {
                     file.fechaInicio = registros[0].fecha;
                     file.fechafin = registros[registros.length - 1].fecha;
                     file.path = filePath;
-                    console.log(file.fechaInicio)
                     process(file)
                 });
             }
@@ -83,8 +83,6 @@ class ReadFileController {
     }
 
     async SaveFile(file) {
-        // const { tituloArchivo, origen, magnitud, description } = req.body;
-
         let encabezado = new Encabezado();
         encabezado.tituloArchivo = file.tituloArchivo;
         encabezado.origen = file.origen;
@@ -99,7 +97,7 @@ class ReadFileController {
         encabezado.fechafin = file.fechafin;
         encabezado.path = file.path;
         await encabezado.save(function (error, room) {
-            console.log(room.id);
+            
             const data = [];
             for (let j = 0; j < file.lecturas.length; j++) {
                 if (!isNaN(file.lecturas[j].valor)) {
@@ -114,7 +112,7 @@ class ReadFileController {
             }
 
             Datos.insertMany(data).then(function () {
-                console.log("Data inserted")  // Success
+              // Success
             }).catch(function (error) {
                 console.log(error)      // Failure
             });
@@ -124,6 +122,7 @@ class ReadFileController {
     ReadContentXlsFile(filePath, process) {
 
         let file = new FileModel();
+        file.origen = ORIGEN_REMMAQ;
         var workbook = XLSX.readFile(`${filePath}`, {
             type: "binary",
             cellText: false,

@@ -6,9 +6,7 @@ class DataController {
     constructor() {
     }
 
-    async GetDatos(cb){
-
-        let idEncabezado = '60a296293fa7b2172ca9d2d7'
+    async GetDatos(idEncabezado,cb){
         const archivos = await Encabezado.find({ _id:idEncabezado  });
         // console.log('encabezado');
         // console.log(archivos);
