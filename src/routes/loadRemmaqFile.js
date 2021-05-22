@@ -39,9 +39,6 @@ router.post('/users/saveremmaq', isAuthenticated, async (req, res, next) => {
         file.tituloArchivo = req.body.tituloArchivo;
         file.magnitud = req.body.magnitud;
         file.descripcion = req.body.description;
-        console.log('----guardar----')
-        console.log(file);
-        console.log('----guardar----')
         fileControllerInstance.SaveFile(file);
         res.render("users/historialArchivos.hbs", { datosResumen: req.body });
     });

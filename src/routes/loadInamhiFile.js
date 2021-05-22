@@ -12,7 +12,7 @@ function isAuthenticated(req, res, next) {
 router.get("/users/uploadin", isAuthenticated, (req, res) => {
     res.render("users/datosinamhi.hbs");
 });
-router.get('/users/downloadcsv', downloaderController.download);
+router.get('/users/downloadcsv/:id', downloaderController.download);
 
 router.post('/users/uploadin', isAuthenticated, (req, res) => {
 
