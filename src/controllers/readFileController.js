@@ -50,6 +50,10 @@ class ReadFileController {
                         const startIndex = linea.indexOf(CODIGO_INICIO_DELIMITADOR, 0);
                         const endIndex = linea.indexOf(CODIGO_FIN_DELIMITADOR, 0);
                         file.nombreEstaciones = linea.substring(startIndex + 1, endIndex).trim();
+                        //codigo estacion
+                        const startIndexCodigo = linea.indexOf(CODIGO_FIN_DELIMITADOR, 0);
+                        file.codigoEstacion = linea.substring(startIndexCodigo + 7, linea.length).trim();
+                        console.log(file.codigoEstacion);
                     }
 
                     //Lectura de registros
@@ -60,7 +64,7 @@ class ReadFileController {
                             const dia = "" + (index - 1);
                             const arreglo = {
                                 fecha: fechaFila + "/" + dia.padStart(2, '0'),
-                                pertenece: file.nombreEstaciones,
+                                estacion: file.nombreEstaciones,
                                 valor: fila[index],
                             };
                             registros.push(arreglo);
@@ -86,7 +90,9 @@ class ReadFileController {
         let encabezado = new Encabezado();
         encabezado.tituloArchivo = file.tituloArchivo;
         encabezado.origen = file.origen;
-        encabezado.magnitud = file.magnitud;
+        encabezado.magnitud = file.magnitud.normalize('NFD')
+           .replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1")
+           .normalize();
         encabezado.description = file.description;
 
 
@@ -95,6 +101,7 @@ class ReadFileController {
         encabezado.nombreestaciones = file.nombreEstaciones;
         encabezado.fechainicio = file.fechaInicio;
         encabezado.fechafin = file.fechafin;
+        encabezado.codigoEstacion = file.codigoEstacion;
         encabezado.path = file.path;
         await encabezado.save(function (error, room) {
             
@@ -104,10 +111,10 @@ class ReadFileController {
                     const dato = {
                         encabezado: room.id,
                         fecha: file.lecturas[j].fecha,
-                        pertenece: file.lecturas[j].pertenece,
+                        estacion: file.lecturas[j].estacion,
                         valor: file.lecturas[j].valor,
                     };
-                    data.push(dato);
+                    if(dato.valor){data.push(dato);}
                 }
             }
 
@@ -164,7 +171,7 @@ class ReadFileController {
                     if (!isNaN(xlData[i][j])) {
                         const arreglo = {
                             fecha: xlData[i][0],
-                            pertenece: cabecera[j],
+                            estacion: cabecera[j],
                             valor: xlData[i][j],
                         };
                         data.push(arreglo);

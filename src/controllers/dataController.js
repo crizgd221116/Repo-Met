@@ -10,10 +10,25 @@ class DataController {
         const archivos = await Encabezado.find({ _id:idEncabezado  });
         // console.log('encabezado');
         // console.log(archivos);
-        const registros = await Datos.find({ encabezado:idEncabezado  });
-        // console.log('registros-----');
-        // console.log(registros);
-        cb(registros);
+        await Datos.find({ encabezado:idEncabezado  }).populate('encabezado').then(data=>{
+            let result = [];
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+                const dato ={
+
+                    codigoEstacion: element.encabezado.codigoEstacion,
+                    estacion: element.estacion,
+                    fecha: element.fecha,
+                    anio: element.fecha.split("/")[0],
+                    mes: element.fecha.split("/")[1],
+                    dia: element.fecha.split("/")[2],
+                    valor: element.valor,
+                    magnitudArchivo: element.encabezado.magnitud
+                }
+                result.push(dato);
+            }
+        cb(result);
+        });
     }
 }
 
