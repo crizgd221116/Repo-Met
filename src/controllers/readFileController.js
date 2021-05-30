@@ -93,7 +93,7 @@ class ReadFileController {
         encabezado.magnitud = file.magnitud.normalize('NFD')
            .replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1")
            .normalize();
-        encabezado.description = file.description;
+        encabezado.description = file.descripcion;
 
 
         encabezado.user = file.userId;
