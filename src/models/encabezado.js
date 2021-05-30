@@ -11,6 +11,7 @@ const EncabezadoSchema = new mongoose.Schema({
     fechainicio: { type: String },
     fechafin: { type: String },
     path: { type: String },
+    codigoEstacion: {type:String},
     user: { type: String },
     metadatos: {
         type: Schema.Types.ObjectId,
