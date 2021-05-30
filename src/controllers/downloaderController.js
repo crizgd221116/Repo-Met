@@ -1,46 +1,31 @@
 
 const DataController = require("../controllers/dataController");
 const downloadResource = require("../utilities/util");
+const downloadResourceTxt = require("../utilities/utilTxt");
+const downloadResourceXlsx = require("../utilities/utilXlsx");
 
- const controller = {};
+const controller = {};
 
- controller.download = async (req, res) => {
-  console.log("--RES--");
-  console.log(req.params.id);
-  console.log("--RES FIN--");
-  // console.log("--REQ--");
-  //  console.log(req);
-  //  console.log("--REQ FIN--");
-  // const fields = [
-  //   {
-  //     label: 'ID',
-  //     value: '_id'
-  //   },
-  //   {
-  //     label: 'Encabezado',
-  //     value: 'encabezado'
-  //   },
-  //   {
-  //    label: 'Fecha',
-  //     value: 'fecha'
-  //   },
-  //   {
-  //    label: 'Pertenece',
-  //     value: 'pertenece'
-  //   },
-  //   {
-  //    label: 'Valor',
-  //     value: 'valor'
-  //   }
-  // ];
-const fields = [ 'fecha','pertenece','valor' ];
+controller.download = async (req, res) => {
+  const fields = ['fecha', 'estacion', 'valor'];
   const dc = new DataController();
-  const data2 = await dc.GetDatos(req.params.id,data=>{
-    // console.log("--Obtencion de datos---");
-    // console.log(data);
-    // console.log("--Obtencion de datos---");
-    return downloadResource(res, 'test.csv', fields, data);
+  const data2 = await dc.GetDatos(req.params.id, data => {
+    return downloadResource(res, `${data[0].magnitudArchivo}` + '.csv', fields, data);
   })
- }
+}
 
- module.exports = controller;
+controller.downloadTxt = async (req, res) => {
+  const dc = new DataController();
+  const data2 = await dc.GetDatos(req.params.id, data => {
+    return downloadResourceTxt(res, `${data[0].magnitudArchivo}` + '.txt', data);
+  })
+}
+
+controller.downloadXLSX = async (req, res) => {
+  const dc = new DataController();
+  const data2 = await dc.GetDatos(req.params.id, data => {
+    return downloadResourceXlsx(res, `${data[0].magnitudArchivo}` + '.xlsx', data);
+  })
+}
+
+module.exports = controller;

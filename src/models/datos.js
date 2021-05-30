@@ -4,7 +4,7 @@ const dato = new mongoose.Schema({
     fecha: { type: String},
     valor: { type: String},
     codigoMagnitud:{type:String},
-    pertenece:{type:String},
+    estacion:{type:String},
     encabezado: {
         type: Schema.Types.ObjectId,
         ref: 'encabezado',

@@ -13,6 +13,8 @@ router.get("/users/uploadin", isAuthenticated, (req, res) => {
     res.render("users/datosinamhi.hbs");
 });
 router.get('/users/downloadcsv/:id', downloaderController.download);
+router.get('/users/downloadtxt/:id', downloaderController.downloadTxt);
+router.get('/users/downloadxlsx/:id', downloaderController.downloadXLSX);
 
 router.post('/users/uploadin', isAuthenticated, (req, res) => {
 
@@ -41,6 +43,7 @@ router.post('/users/saveinamhi', isAuthenticated, async (req, res, next) => {
          fileControllerInstance.SaveFile(file);
         res.render("users/historialArchivos.hbs", { datosResumen: req.body });
     });
+    // res.redirect("/users/hist/1");
 });
 
 // router.get("/users/test", isAuthenticated, (req, res) => {
