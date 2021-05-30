@@ -24,6 +24,7 @@ router.post('/users/uploadin', isAuthenticated, (req, res) => {
         req.body.numregistros = file.lecturas.length;
         req.body.firstdate = file.fechaInicio;
         req.body.lastdate = file.fechafin;
+        req.body.magnitud = file.magnitud;
         req.body.path = file.path;
         req.body.userid = req.user.id;
         res.render('users/resumentabladatos.hbs', { datosResumen: req.body })
