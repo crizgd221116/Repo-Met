@@ -40,7 +40,8 @@ router.post('/users/saveremmaq', isAuthenticated, async (req, res, next) => {
         file.magnitud = req.body.magnitud;
         file.descripcion = req.body.description;
         fileControllerInstance.SaveFile(file);
-        res.render("users/historialArchivos.hbs", { datosResumen: req.body });
+        // res.render("users/historialArchivos.hbs", { datosResumen: req.body });
+        res.redirect("/users/hist/1");
     });
 });
 

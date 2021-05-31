@@ -71,7 +71,7 @@ router.put("/users/editinfo/:id", async (req, res) => {
     ocupacion,
     description,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   await User.findOneAndUpdate(
     /* req.params.id,{/genero, titulo, ocupacion, descriptionname, email
             } */

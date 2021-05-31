@@ -53,7 +53,7 @@ class ReadFileController {
                         //codigo estacion
                         const startIndexCodigo = linea.indexOf(CODIGO_FIN_DELIMITADOR, 0);
                         file.codigoEstacion = linea.substring(startIndexCodigo + 7, linea.length).trim();
-                        console.log(file.codigoEstacion);
+                        // console.log(file.codigoEstacion);
                     }
 
                     //Lectura de registros
