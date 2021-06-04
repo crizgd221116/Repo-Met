@@ -1,3 +1,41 @@
+<head>
+  <script>
+    $(document).ready(function () {
+      $('#exampleModal').modal('show')
+
+    });
+  </script> 
+
+</head>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="align-content: center;">Formato del archivo INAMHI</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <h3>¡Recuerde!</h3>La extensión del archivo debe ser .txt
+            <p for="recipient-name" class="col-form-label">El archivo que debe subir en esta opcion debe estar con el
+              formato mostrado en la imagen a continuación:
+            </p>
+          </div>
+          <div class="form-group" style="margin-left: auto;">
+            <img src="/images/formatoInamhi.JPG" alt="formato archivo remmaq" class="responsive">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container-fluid">
     <div class="row ">
         <div class=".col-md-4 col-sm-4 col-xs-12"></div>

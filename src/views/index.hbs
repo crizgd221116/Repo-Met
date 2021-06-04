@@ -12,12 +12,11 @@
 
     <!------ Include the above in your HEAD tag ---------->
 </head>
-
 <nav class="navbar navbar-expand-md" style="background-color: #2e8a9b;">
-    <div class="container">
+    {{!-- <div class="container">
         <div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px;">
             <form action="">
-                <select class="js-example-responsive" multiple="multiple" style="width: 1024px;">
+                <select class="js-example-responsive"  style="width: 1024px;">
                     <optgroup label="Institución">
                         <option value="Inamhi">INAMHI</option>
                         <option value="Remmaq">REMMAQ</option>
@@ -48,12 +47,10 @@
 
         </div>
     </div>
-
+ --}}
 
 </nav>
-
 <div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 60%;">
-
 
     {{#each allfiles}}
     <div class="card">
@@ -72,10 +69,10 @@
 
             <p class="card-text"> <a style="font-weight: bold;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
             </p>
-            <button class="btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: black;">CSV</a></button>
-            <button class="btn-success"><a href="/users/downloadxlsx/{{id}}" style="color: black;">XLSX</a></button>
-            <button class="btn-info"><a href="/users/downloadtxt/{{id}}" style="color: black;">RCLIMDEX</a></button>
-            <button class="btn-secondary"><a href="/users/viewencabezados/{{id}}"
+            <button class="btn btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: whitesmoke;">CSV</a></button>
+            <button class="btn btn-success"><a href="/users/downloadxlsx/{{id}}" style="color: black;">XLSX</a></button>
+            <button class="btn btn-info"><a href="/users/downloadtxt/{{id}}" style="color: black;">RCLIMDEX</a></button>
+            <button class="btn btn-secondary"><a href="/users/viewencabezados/{{id}}"
                     style="color: whitesmoke;">Original</a></button>
             {{else}}
             <br>

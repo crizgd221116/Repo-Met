@@ -1,8 +1,9 @@
 const Excel = require('exceljs');
+const uuid = require('uuid').v4;
 
 const downloadResourceXlsx = async(res, fileName, data) => {
     let workbook = new Excel.Workbook();
-    let worksheet = workbook.addWorksheet(`test`);
+    let worksheet = workbook.addWorksheet(`${fileName}`);
     worksheet.columns = [
       {header: 'Fecha', key: 'fecha'},
       {header: 'Estacion', key: 'estacion'},
@@ -17,7 +18,7 @@ const downloadResourceXlsx = async(res, fileName, data) => {
       );
       res.setHeader(
         "Content-Disposition",
-        "attachment; filename=" + `${fileName}`
+        "attachment; filename=" + `${uuid()}.xlsx`
       );
       return workbook.xlsx.write(res).then(function () {
         res.status(200).end();

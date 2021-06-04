@@ -11,10 +11,8 @@ router.get('/index/:page', async(req, res, next) => {
         .skip((perPage * page) - perPage)
         .limit(perPage)
         .exec((err, allfiles) => {
-            FileRemmaq.count({}, (err, count) => {
+            FileRemmaq.countDocuments({}, (err, count) => {
                 if (err) return next(err);
-                // console.log(count)
-                // console.log(Math.ceil(count / perPage))
                 res.render('index.hbs', {
                     allfiles,
                     page,
@@ -28,6 +26,9 @@ router.get('/index/:page', async(req, res, next) => {
 
 });
 
+router.get('/', (req, res) => {
+    res.redirect('/index/1');
+});
 router.get('/about', (req, res) => {
     res.render('about.hbs');
 });

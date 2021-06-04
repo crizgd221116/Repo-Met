@@ -21,7 +21,8 @@ router.get("/users/contrasena/:id", (req, res) => {
 });
 
 //------------ registro ------------//
-router.get("/users/register", (req, res) => res.render("users/register.hbs"));
+router.get("/users/register", (req, res) =>res.render("users/register.hbs"));
+  
 
 //------------ Register POST  ------------//
 router.post("/users/register", authController.registerHandle);
@@ -71,7 +72,7 @@ router.put("/users/editinfo/:id", async (req, res) => {
     ocupacion,
     description,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   await User.findOneAndUpdate(
     /* req.params.id,{/genero, titulo, ocupacion, descriptionname, email
             } */
@@ -104,7 +105,7 @@ router.get('/users/hist/:page', isAuthenticated, async (req, res, next) => {
     .skip((perPage * page) - perPage)
     .limit(perPage)
     .exec((err, archivos) => {
-      FileRemmaq.count({ user: req.user.id }, (err, count) => {
+      FileRemmaq.countDocuments({ user: req.user.id }, (err, count) => {
         if (err) return next(err);
         // console.log(count)
         // console.log(Math.ceil(count / perPage))
@@ -128,7 +129,7 @@ function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/index/1');
+  res.redirect('/');
 }
 
 module.exports = router;
