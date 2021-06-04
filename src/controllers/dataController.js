@@ -8,8 +8,6 @@ class DataController {
 
     async GetDatos(idEncabezado,cb){
         const archivos = await Encabezado.find({ _id:idEncabezado  });
-        // console.log('encabezado');
-        // console.log(archivos);
         await Datos.find({ encabezado:idEncabezado  }).populate('encabezado').then(data=>{
             let result = [];
             for (let index = 0; index < data.length; index++) {

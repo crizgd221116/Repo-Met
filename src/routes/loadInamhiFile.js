@@ -42,7 +42,8 @@ router.post('/users/saveinamhi', isAuthenticated, async (req, res, next) => {
         file.tituloArchivo = req.body.tituloArchivo;
         file.descripcion = req.body.description;
          fileControllerInstance.SaveFile(file);
-        res.render("users/historialArchivos.hbs", { datosResumen: req.body });
+        // res.render("users/historialArchivos.hbs", { datosResumen: req.body });
+        res.redirect("/users/hist/1");
     });
     // res.redirect("/users/hist/1");
 });
