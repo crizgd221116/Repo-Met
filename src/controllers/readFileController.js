@@ -11,6 +11,11 @@ const CODIGO_FIN_DELIMITADOR = 'CODIGO';
 const CODIGO_INICIO_DELIMITADOR = ':';
 const ORIGEN_REMMAQ ="REMMAQ";
 const ORIGEN_INAMHI ="INAMHI";
+
+//
+const MAGNITUD_DELIMITADOR  = "/";
+const ANIO_DELIMITADOR = "ANIO";
+
 class ReadFileController {
     constructor() {
     }
@@ -37,16 +42,17 @@ class ReadFileController {
 
                 let i = 0;
                 const registros = [];
+                let startIndexDatos = 0;
                 lector.on("line", linea => {
 
                     //magnitud
-                    if (i == 2) {
+                    if (linea.includes(MAGNITUD_DELIMITADOR)) {
                         const index = linea.indexOf(")", 0);
                         file.magnitud = linea.substring(0, index + 1);
                     }
 
                     //nombre estacion
-                    if (i == 6) {
+                    if (linea.includes(CODIGO_FIN_DELIMITADOR)) {
                         const startIndex = linea.indexOf(CODIGO_INICIO_DELIMITADOR, 0);
                         const endIndex = linea.indexOf(CODIGO_FIN_DELIMITADOR, 0);
                         file.nombreEstaciones = linea.substring(startIndex + 1, endIndex).trim();
@@ -55,9 +61,13 @@ class ReadFileController {
                         file.codigoEstacion = linea.substring(startIndexCodigo + 7, linea.length).trim();
                         // console.log(file.codigoEstacion);
                     }
+                    
+                    if (linea.includes(ANIO_DELIMITADOR)) {
+                        startIndexDatos = i;
+                    }
 
                     //Lectura de registros
-                    if (i >= 11) {
+                    if (startIndexDatos>0 && i > startIndexDatos) {
                         const fila = linea.split(/\s+/);
                         const fechaFila = fila[0] + "/" + fila[1].padStart(2, '0');
                         for (let index = 2; index < fila.length; index++) {
