@@ -6,6 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
         integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/estilos.css">
 
 
 
@@ -50,45 +51,45 @@
 
 
 </nav>
-<div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 60%;">
+<div class="container-fluid" style="margin-top: 20px; margin-bottom: 180px; width: 60%;">
 
     {{#each allfiles}}
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title" style="color: #2e8a9b ;font-size: 12px;">{{tituloArchivo}}</h2>
-            <p class="card-text" style="font-size: 10px;"><a style="font-weight: bold;font-size: 10px;">Archivo Subido:</a> {{date}}
+            <h2 class="card-title">{{tituloArchivo}}</h2>
+            <p class="card-text"><a>Archivo Subido:</a> {{date}}
             </p>
             <p class="card-text">
-                <a style="font-weight: bold;font-size: 10px;">Origen:</a> <a href="" style="color: black;font-size: 10px;"> {{origen}}</a>
-                | <a style="font-weight: bold;font-size: 10px;">Estación: </a> <a href="" style="color: black;font-size: 10px;">
+                <a >Origen:</a> <a class="card-text-a-custom"> {{origen}}</a>
+                | <a>Estación: </a> <a class="card-text-a-custom">
                     {{nombreestaciones}}</a>
                 {{#if (eq origen "INAMHI")}}
                 
-                <a style="font-weight: bold;font-size: 10px;">Magnitud:</a> <a href="" style="color: black;font-size: 10px;"> {{magnitud}}</a>
+                <a>Magnitud:</a> <a class="card-text-a-custom"> {{magnitud}}</a>
             </p>
 
-            <p class="card-text" style="font-size: 10px;"> <a style="font-weight: bold;font-size: 10px;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
+            <p class="card-text"> <a>Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
             </p>
-            <button class="btn btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: whitesmoke;">CSV</a></button>
-            <button class="btn btn-success"><a href="/users/downloadxlsx/{{id}}" style="color: black;">XLSX</a></button>
-            <button class="btn btn-info"><a href="/users/downloadtxt/{{id}}" style="color: black;">RCLIMDEX</a></button>
-            <button class="btn btn-secondary"><a href="/users/viewencabezados/{{id}}"
-                    style="color: whitesmoke;">Original</a></button>
+            <button class="btn btn-primary"><a href="/users/downloadcsv/{{id}}" >CSV</a></button>
+            <button class="btn btn-success"><a href="/users/downloadxlsx/{{id}}">XLSX</a></button>
+            <button class="btn btn-info-2"><a href="/users/downloadtxt/{{id}}">RCLIMDEX</a></button>
+            <button class="btn btn-secondary-2"><a href="/users/viewencabezados/{{id}}"
+                    >Original</a></button>
             {{else}}
-            <br>
-            <a style="font-weight: bold;">Magnitud:</a> <a href="" style="color: black;"> {{magnitud}}</a>
+           
+            <a>Magnitud:</a> <a class="card-text-a-custom"> {{magnitud}}</a>
             </p>
 
-            <p class="card-text"> <a style="font-weight: bold;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
+            <p class="card-text"> <a>Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
             </p>
-            <button class="btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: black; font-size: 2px;">CSV</a></button>
-            <button class="btn-success"><a href="/users/viewencabezados/{{id}}" style="color: black; font-size: 10px;">XLSX</a></button>
-            <button class="btn-secondary"><a href="/users/viewencabezados/{{id}}"
-                    style="color: whitesmoke;font-size: 10px;">Original</a></button>
+            <button class="btn-primary"><a href="/users/downloadcsv/{{id}}">CSV</a></button>
+            <button class="btn-success"><a href="/users/viewencabezados/{{id}}">XLSX</a></button>
+            <button class="btn-secondary-2"><a href="/users/viewencabezados/{{id}}"
+                    >Original</a></button>
             {{/if}}
         </div>
     </div>
-    </br>
+    
     {{/each}}
     <div class="row">
 
