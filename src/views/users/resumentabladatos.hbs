@@ -10,7 +10,7 @@
            <input type="hidden" id="custId" name="path" value="{{datosResumen.path}}">
            <input type="hidden" id="custId" name="tituloArchivo" value="{{datosResumen.tituloArchivo}}">
            <input type="hidden" id="custId" name="description" value="{{datosResumen.description}}">
-           <input type="hidden" id="custId" name="magnitud" value="{{datosResumen.magnitud}}">
+           {{!-- <input type="hidden" id="custId" name="magnitud" value="{{datosResumen.magnitud}}"> --}}
            <input type="hidden" id="custId" name="userid" value="{{datosResumen.userid}}">
         </div>
         <div class="table-responsive">
@@ -22,8 +22,7 @@
               </tr>
               <tr>
                 <th scope="row" width="40">Estaciones: </th>
-                <td>{{datosResumen.estacionesname}}</td>
-
+                <td><input type="text" style="width:100%" name="estacionesname" value="{{datosResumen.estacionesname}}" required></td>
               </tr>
               <tr>
                 <th scope="row" width="40">Fechas:</th>
@@ -34,7 +33,7 @@
               </tr>
               <tr>
                 <th scope="row">Magnitud:</th>
-                <td>{{datosResumen.magnitud}}</td>
+                <td><input type="text" style="width:100%" name="magnitud" value="{{datosResumen.magnitud}}" required></td>
               </tr>
               <tr>
                 <th scope="row" style="justify-content: ;">Registros:</th>

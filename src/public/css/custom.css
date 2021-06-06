@@ -82,6 +82,7 @@ nav h4 {
 
 .card-title-invest i:hover {
     transform: scale(1.25) rotate(100deg);
+    font-size: 5px;
     color: #18d4ca;
 }
 

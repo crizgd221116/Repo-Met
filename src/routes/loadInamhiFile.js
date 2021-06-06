@@ -35,13 +35,12 @@ router.post('/users/saveinamhi', isAuthenticated, async (req, res, next) => {
     const fileControllerInstance = new fileController();
     fileControllerInstance.ReadTxtFile(req.body.path, file => {
         file.userId = req.body.userid;
-        req.body.estacionesname = file.nombreEstaciones;
-        req.body.numregistros = file.lecturas.length;
-        req.body.firstdate = file.fechaInicio;
-        req.body.lastdate = file.fechafin;
         file.tituloArchivo = req.body.tituloArchivo;
         file.descripcion = req.body.description;
-         fileControllerInstance.SaveFile(file);
+        console.log(req.body);
+        file.nombreEstaciones = req.body.estacionesname;
+        file.magnitud = req.body.magnitud;
+        fileControllerInstance.SaveFile(file);
         // res.render("users/historialArchivos.hbs", { datosResumen: req.body });
         res.redirect("/users/hist/1");
     });
