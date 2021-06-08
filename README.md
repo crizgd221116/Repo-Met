@@ -4,8 +4,9 @@ _El sistema desarrollado en el presente proyecto es un repositorio Web de archiv
 
 ### Autores 📋
 
-_Jonathan Andrés Castillo Vire_
-_Cristhian Fernando Salazar Cevallos_
+*Jonathan Andrés Castillo Vire_
+
+*Cristhian Fernando Salazar Cevallos_
 
 ### Pre-requisitos 📋
 
