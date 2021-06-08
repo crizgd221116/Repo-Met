@@ -17,17 +17,12 @@ _Node JS, MongoDB Compass, Visual Studio Code_
 
 * Clonar el repositorio en la terminal de Visual Studio code o editor de código en uso
 ### `git clone https://github.com/crizgd221116/Repo-Met.git `
-* Acceder al directorio del proyecto
-### `cd ../src/server.js`
 * Ejecutar el comando 
 ### `npm run dev `
 * Ingresar desde el navegador a la dirección
-### `localhost:5000/index/1 `
-
-
+### `localhost:5000 `
 
 ## Construido con 🛠️
-
 _El proyecto se desarrolló con las siguientes herramientas_
 
 * [Node.js](https://nodejs.org/es/) - El framework de JavaScript
