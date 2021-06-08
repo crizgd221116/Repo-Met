@@ -4,9 +4,9 @@ _El sistema desarrollado en el presente proyecto es un repositorio Web de archiv
 
 ### Autores 📋
 
-*Jonathan Andrés Castillo Vire_
+*Jonathan Andrés Castillo Vire
 
-*Cristhian Fernando Salazar Cevallos_
+*Cristhian Fernando Salazar Cevallos
 
 ### Pre-requisitos 📋
 
@@ -15,12 +15,15 @@ _Node JS, MongoDB Compass, Visual Studio Code_
 
 ### Instalación 🔧
 
-_Clonar el repositorio en la terminal de Visual Studio code o editor de código en uso_
+* Clonar el repositorio en la terminal de Visual Studio code o editor de código en uso
+### `git clone https://github.com/crizgd221116/Repo-Met.git `
+* Acceder al directorio del proyecto
+### `cd ../src/server.js`
+* Ejecutar el comando 
+### `npm run dev `
+* Ingresar desde el navegador a la dirección
+### `localhost:5000/index/1 `
 
-
-$ git clone https://github.com/crizgd221116/Repo-Met.git 
-$ cd ../src/server.js
-$ npm run dev
 
 
 ## Construido con 🛠️
