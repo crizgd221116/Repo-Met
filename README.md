@@ -1,6 +1,6 @@
 # Repositorio Meteorológico
 
-_El sistema desarrollado en el presente proyecto es un repositorio Web de archivos de datos meteorológicos para datos de las estaciones pertenecientes a la ciudad de Quito. El repositorio tiene como objetivo agilizar la divulgación de archivos de datos de tipo meteorológico, brindando a los usuarios la posibilidad compartir y obtener archivos en formatos específicos que se adapten a sus necesidades._
+_El sistema desarrollado en el presente proyecto es un repositorio Web de archivos de datos meteorológicos para datos de las estaciones pertenecientes a la ciudad de Quito. El repositorio tiene como objetivo agilizar la divulgación de archivos de datos de tipo meteorológico, brindando a los usuarios la posibilidad compartir y obtener archivos en formatos específicos que se adapten a sus necesidades. El producto final un repositorio que permite la carga de archivos manejados por INAMHI y REMMAQ en sus formatos originales, brindando la opción de obtenerlos en formato xls, CSV, txt y el archivo original._
 
 ### Autores 📋
 
@@ -28,10 +28,12 @@ _Node JS, MongoDB Compass, Visual Studio Code_
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
+_El proyecto se desarrolló con las siguientes herramientas_
 
 * [Node.js](https://nodejs.org/es/) - El framework de JavaScript
 * [MongoDB](https://www.mongodb.com/es) - Gestor de base de datos
 * [Visual Studio Code](https://code.visualstudio.com) - Entorno de desarrollo
 * [Bootstrap](https://getbootstrap.com) - Componentes
 * [Handlebars](https://handlebarsjs.com) - Componentes
+* [Oauth2] (https://oauth.net/2/) - Protocolo de autenticación
+* [Passport] (http://www.passportjs.org) - middlewre de autenticación
