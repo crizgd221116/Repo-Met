@@ -4,8 +4,8 @@ const nodemailer = require('nodemailer');
 const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const jwt = require('jsonwebtoken');
-const JWT_KEY = "jwtactmet22";
-const JWT_RESET_KEY = "jwtresmet22";
+const JWT_KEY = "jwtact22";
+const JWT_RESET_KEY = "jwtres2";
 
 //------------ Modelo Usuario ------------//
 const User = require('../models/User');
@@ -24,27 +24,25 @@ exports.registerHandle = (req, res) => {
 
     //------------ Validación de contraseña ------------//
     if (password != password2) {
-
         console.log("las contraseñas no coinciden")
         req.flash("error_msg", "las contraseñas no coinciden");
         res.redirect('/users/register');
         //-------- Número de caracteres de la contraseña------//
-
     }
     if (password.length < 8) {
         console.log("Las contraseñas deben tener por lo menos 8 caracteres")
         req.flash("error_msg", "Las contraseñas deben tener por lo menos 8 caracteres");
         res.redirect('/users/register');
+
     } else {
-        //------------ Validación exitosa ------------//
+        //------------ Validación usuario existente ------------//
         User.findOne({ email: email }).then(user => {
             if (user) {
                 console.log("Correo ya Existe")
                 req.flash("error_msg", "Correo ya Existe");
-
                 res.redirect('/users/register');
-            } else {
 
+            } else {
                 const oauth2Client = new OAuth2(
                     "1443120397-d6qgl41bfq45n0flhhfmvr9fkl6lo2ti.apps.googleusercontent.com", // ClientID
                     "kC_x2z4Zxm4T1VBledyz4hkh", // Client Secret
@@ -60,7 +58,7 @@ exports.registerHandle = (req, res) => {
 
                 const accessToken = oauth2Client.getAccessToken()
 
-                const token = jwt.sign({ name, email, password }, JWT_KEY, { expiresIn: '3m' });
+                const token = jwt.sign({ name, email, password }, JWT_KEY, { expiresIn: '5m' });
                 const CLIENT_URL = 'http://' + req.headers.host;
 
                 const output = `
@@ -267,9 +265,9 @@ exports.registerHandle = (req, res) => {
 
                 // Envio de correo con transport object
                 const mailOptions = {
-                    from: '"Repo Admin" <repometquito@gmail.com>', // Sender address
-                    to: email, // list of receivers
-                    subject: "Activar cuenta: Repositorio Meteorológico ✔", // Subject line
+                    from: '"Repo Admin" <repometquito@gmail.com>', // Dirección de origen
+                    to: email, // Destino
+                    subject: "Activar cuenta: Repositorio Meteorológico ✔", // Asunto
                     generateTextFromHTML: true,
                     html: output, // html body
                 };
@@ -290,7 +288,7 @@ exports.registerHandle = (req, res) => {
     }
 }
 
-//------------ Manejo de activación de la contraseña ------------//
+//------------ Manejo de activación de la cuenta ------------//
 exports.activateHandle = (req, res) => {
     const token = req.params.token;
     let errors = [];
@@ -300,18 +298,13 @@ exports.activateHandle = (req, res) => {
                 console.log("Enlace incorrecto o caducado, vuelva a registrarse")
                 req.flash("error_msg", "Enlace incorrecto o caducado, vuelva a registrarse");
                 res.redirect('/users/register');
-
             } else {
                 const { name, email, password } = decodedToken;
                 User.findOne({ email: email }).then(user => {
                     if (user) {
-                        //------------ User already exists ------------//
-
-                        console.log("Email registrado ya esta registrado, inicie sesión");
-
-                        req.flash("error_msg", "Email registrado ya esta registrado, inicie sesión")
-
-
+                        //------------ Usuario Registrado ------------//
+                        console.log("Email ingresado ya esta registrado, inicie sesión");
+                        req.flash("error_msg", "Email ingresado ya esta registrado, inicie sesión")
                         res.redirect('/users/login');
                     } else {
                         const newUser = new User({
@@ -319,7 +312,6 @@ exports.activateHandle = (req, res) => {
                             email,
                             password
                         });
-
                         bcryptjs.genSalt(10, (err, salt) => {
                             bcryptjs.hash(newUser.password, salt, (err, hash) => {
                                 if (err) throw err;
@@ -350,7 +342,6 @@ exports.forgotPassword = (req, res) => {
     const { email } = req.body;
 
     let errors = [];
-
     //------------ Validación campo vacios ------------//
     if (!email) {
         console.log("Ingrese un email")
@@ -597,11 +588,11 @@ exports.forgotPassword = (req, res) => {
                             },
                         });
 
-                        // send mail with defined transport object
+                        // enviar correo con transport object
                         const mailOptions = {
-                            from: '"Repo Admin" <repometquito@gmail.com>', // sender address
-                            to: email, // list of receivers
-                            subject: "Restablecimiento de contraseña: Repositorio Meteorológico ✔", // Subject line
+                            from: '"Repo Admin" <repometquito@gmail.com>', // dirección de envío
+                            to: email, // Destino
+                            subject: "Restablecimiento de contraseña: Repositorio Meteorológico ✔", // Asunto
                             html: output, // html body
                         };
 
@@ -653,8 +644,6 @@ exports.gotoReset = (req, res) => {
         console.log("Password reset error!")
     }
 }
-
-
 exports.resetPassword = (req, res) => {
     var { password, password2 } = req.body;
     const id = req.params.id;
@@ -695,8 +684,16 @@ exports.resetPassword = (req, res) => {
                             console.log("Contraseña restaurada exitosamente")
                             req.flash("success_msg", "Contraseña restaurada exitosamente");
                             res.redirect('/users/login');
+                            req.logout();
+
+
+
                         }
+
+
                     }
+
+
                 );
 
             });
