@@ -37,7 +37,6 @@ router.post('/users/saveinamhi', isAuthenticated, async (req, res, next) => {
         file.userId = req.body.userid;
         file.tituloArchivo = req.body.tituloArchivo;
         file.descripcion = req.body.description;
-        console.log(req.body);
         file.nombreEstaciones = req.body.estacionesname;
         file.magnitud = req.body.magnitud;
         fileControllerInstance.SaveFile(file);

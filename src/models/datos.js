@@ -8,7 +8,8 @@ const dato = new mongoose.Schema({
     encabezado: {
         type: Schema.Types.ObjectId,
         ref: 'encabezado',
-      }
+      },
+    codigoEstacion: {type:String}
     });
 
 const datos = mongoose.model('datos', dato);

@@ -14,14 +14,15 @@ class DataController {
                 const element = data[index];
                 const dato ={
 
-                    codigoEstacion: element.encabezado.codigoEstacion,
+                    codigoEstacion: element.codigoEstacion,
                     estacion: element.estacion,
                     fecha: element.fecha,
                     anio: element.fecha.split("/")[0],
                     mes: element.fecha.split("/")[1],
                     dia: element.fecha.split("/")[2],
                     valor: element.valor,
-                    magnitudArchivo: element.encabezado.magnitud
+                    magnitudArchivo: element.encabezado.magnitud,
+                    tieneNombreEstacion: element.estacion!=undefined
                 }
                 result.push(dato);
             }

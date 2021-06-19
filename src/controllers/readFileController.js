@@ -131,7 +131,7 @@ class ReadFileController {
         encabezado.nombreestaciones = file.nombreEstaciones;
         encabezado.fechainicio = file.fechaInicio;
         encabezado.fechafin = file.fechafin;
-        encabezado.codigoEstacion = file.codigoEstacion;
+        
         encabezado.path = file.path;
         await encabezado.save(function (error, room) {
             
@@ -143,6 +143,7 @@ class ReadFileController {
                         fecha: file.lecturas[j].fecha,
                         estacion: file.lecturas[j].estacion,
                         valor: file.lecturas[j].valor,
+                        codigoEstacion: file.codigoEstacion
                     };
                     if(dato.valor){data.push(dato);}
                 }

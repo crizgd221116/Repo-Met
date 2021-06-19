@@ -4,9 +4,19 @@ const uuid = require('uuid').v4;
 const downloadResourceXlsx = async(res, fileName, data) => {
     let workbook = new Excel.Workbook();
     let worksheet = workbook.addWorksheet(`${fileName}`);
+
+    let cabeceraEstacion = "";
+    let campoEstacion = "";
+    if (data[0].tieneNombreEstacion) {
+      cabeceraEstacion = "Estacion";
+      campoEstacion = "estacion";
+    }else{
+      cabeceraEstacion = "Codigo";
+      campoEstacion = "codigoEstacion";
+    }
     worksheet.columns = [
       {header: 'Fecha', key: 'fecha'},
-      {header: 'Estacion', key: 'estacion'},
+      {header: cabeceraEstacion, key: campoEstacion},
       {header: `${data[0].magnitudArchivo}`, key: 'valor'}
     ];
       worksheet.getRow(1).font = {bold: true}
