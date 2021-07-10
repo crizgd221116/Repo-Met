@@ -9,11 +9,16 @@ const Datos = require("../models/datos");
 //Delimitadores
 const CODIGO_FIN_DELIMITADOR = 'CODIGO';
 const CODIGO_INICIO_DELIMITADOR = ':';
-const ORIGEN_REMMAQ ="REMMAQ";
-const ORIGEN_INAMHI ="INAMHI";
+const ORIGEN_REMMAQ = "REMMAQ";
+const ORIGEN_INAMHI = "INAMHI";
+
+//
+const MAGNITUD_DELIMITADOR = "/";
+const ANIO_DELIMITADOR = "ANIO";
+const CODIGO_ARCHIVO_SIN_CABECERA = "C�digo";
+
 class ReadFileController {
-    constructor() {
-    }
+    constructor() {}
 
 
     ReadTxtFile(filePath, cb) {
@@ -27,7 +32,7 @@ class ReadFileController {
     ReadContentTxtFile(filePath, process) {
         let file = new FileModel();
         file.origen = ORIGEN_INAMHI;
-        fs.readFile(`${filePath}`, 'utf8', function (err, data) {
+        fs.readFile(`${filePath}`, 'utf8', function(err, data) {
             if (err) {
                 console.log(err);
             } else {
@@ -37,16 +42,19 @@ class ReadFileController {
 
                 let i = 0;
                 const registros = [];
+                let startIndexDatos = 0;
+                let startIndexDatosSinCabecera = 0;
+                let hasHeader = true;
                 lector.on("line", linea => {
 
                     //magnitud
-                    if (i == 2) {
+                    if (linea.includes(MAGNITUD_DELIMITADOR)) {
                         const index = linea.indexOf(")", 0);
                         file.magnitud = linea.substring(0, index + 1);
                     }
 
                     //nombre estacion
-                    if (i == 6) {
+                    if (linea.includes(CODIGO_FIN_DELIMITADOR)) {
                         const startIndex = linea.indexOf(CODIGO_INICIO_DELIMITADOR, 0);
                         const endIndex = linea.indexOf(CODIGO_FIN_DELIMITADOR, 0);
                         file.nombreEstaciones = linea.substring(startIndex + 1, endIndex).trim();
@@ -56,8 +64,17 @@ class ReadFileController {
                         // console.log(file.codigoEstacion);
                     }
 
+                    if (linea.includes(ANIO_DELIMITADOR)) {
+                        startIndexDatos = i;
+                    }
+
+                    if (linea.includes(CODIGO_ARCHIVO_SIN_CABECERA)) {
+                        startIndexDatosSinCabecera = i;
+                        hasHeader = false;
+                    }
+
                     //Lectura de registros
-                    if (i >= 11) {
+                    if (startIndexDatos > 0 && i > startIndexDatos) {
                         const fila = linea.split(/\s+/);
                         const fechaFila = fila[0] + "/" + fila[1].padStart(2, '0');
                         for (let index = 2; index < fila.length; index++) {
@@ -69,13 +86,25 @@ class ReadFileController {
                             };
                             registros.push(arreglo);
                         }
-
+                    } else if (!hasHeader && i > startIndexDatosSinCabecera) {
+                        const fila = linea.split(/\s+/);
+                        const fechaFila = fila[1] + "/" + fila[2].padStart(2, '0');
+                        file.codigoEstacion = fila[0].trim();
+                        for (let index = 3; index < fila.length; index++) {
+                            const dia = "" + (index - 2);
+                            const arreglo = {
+                                fecha: fechaFila + "/" + dia.padStart(2, '0'),
+                                estacion: file.nombreEstaciones,
+                                valor: fila[index],
+                            };
+                            registros.push(arreglo);
+                        }
                     }
                     i++;
                 });
 
 
-                lector.on('close', function () {
+                lector.on('close', function() {
                     file.lecturas = registros;
                     file.fechaInicio = registros[0].fecha;
                     file.fechafin = registros[registros.length - 1].fecha;
@@ -86,13 +115,12 @@ class ReadFileController {
         });
     }
 
+
     async SaveFile(file) {
         let encabezado = new Encabezado();
         encabezado.tituloArchivo = file.tituloArchivo;
         encabezado.origen = file.origen;
-        encabezado.magnitud = file.magnitud.normalize('NFD')
-           .replace(/([^n\u0300-\u036f]|n(?!\u0303(?![\u0300-\u036f])))[\u0300-\u036f]+/gi,"$1")
-           .normalize();
+        encabezado.magnitud = file.magnitud;
         encabezado.description = file.descripcion;
 
 
@@ -101,10 +129,10 @@ class ReadFileController {
         encabezado.nombreestaciones = file.nombreEstaciones;
         encabezado.fechainicio = file.fechaInicio;
         encabezado.fechafin = file.fechafin;
-        encabezado.codigoEstacion = file.codigoEstacion;
+
         encabezado.path = file.path;
-        await encabezado.save(function (error, room) {
-            
+        await encabezado.save(function(error, room) {
+
             const data = [];
             for (let j = 0; j < file.lecturas.length; j++) {
                 if (!isNaN(file.lecturas[j].valor)) {
@@ -113,15 +141,16 @@ class ReadFileController {
                         fecha: file.lecturas[j].fecha,
                         estacion: file.lecturas[j].estacion,
                         valor: file.lecturas[j].valor,
+                        codigoEstacion: file.codigoEstacion
                     };
-                    if(dato.valor){data.push(dato);}
+                    if (dato.valor) { data.push(dato); }
                 }
             }
 
-            Datos.insertMany(data).then(function () {
-              // Success
-            }).catch(function (error) {
-                console.log(error)      // Failure
+            Datos.insertMany(data).then(function() {
+                // Success
+            }).catch(function(error) {
+                console.log(error) // Failure
             });
         });
     }

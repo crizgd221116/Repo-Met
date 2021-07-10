@@ -12,45 +12,70 @@
 
     <!------ Include the above in your HEAD tag ---------->
 </head>
-<nav class="navbar navbar-expand-md" style="background-color: #2e8a9b;">
-    {{!-- <div class="container">
+<nav class="navbar navbar-expand-md" style="background-color: #2e8a9b;zoom:70%">
+    <div class="container">
         <div class="container-fluid" style="margin-top: 20px; margin-bottom: 20px;">
-            <form action="">
-                <select class="js-example-responsive"  style="width: 1024px;">
-                    <optgroup label="Institución">
-                        <option value="Inamhi">INAMHI</option>
-                        <option value="Remmaq">REMMAQ</option>
-                    </optgroup>
-                    <optgroup label="Estación">
-                        <option value="AL">Belisario</option>
-                        <option value="WY">UPS</option>
-                        <option value="WY">Alameda</option>
-                    </optgroup>
-                    <optgroup label="Magnitud">
-                        <option value="WY">Temperatura</option>
-                        <option value="WY">Humedad</option>
-                        <option value="WY">Precipitación</option>
-                        <option value="WY">Nubosidad</option>
-                    </optgroup>
-                </select>
+            <form action="/search" method="GET">
+                {{!-- <input type="text" style="width: 50em;height: 38px;border-style: dotted;border-radius: 10px;"
+                    name="searchText" id="searchText" placeholder="Realiza tu busqueda por origen, estacion o magnitud">
                 <button type="submit" class="btn btn-warning btn-sm"> <img src="/images/search.png" alt="x" /></button>
-                <script>
-                    $(document).ready(function () {
-                        $('.js-example-responsive').select2({
-                            placeholder: "Buscar"
+                --}}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control"
+                        style="width: 50em;height: 38px;border-radius: 10px;border: dotted 5px;" name="searchText"
+                        id="searchText" placeholder="Realiza tu búsqueda por origen, estacion o magnitud">
+                    <button class="btn btn-warning" type="submit"><img src="/images/search.png" style="width: 20px;"
+                            alt="Search Files" /></button>
+                </div>
 
-                        });
-                    });
-                </script>
             </form>
 
 
         </div>
     </div>
- --}}
-
 </nav>
-<div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 60%;">
+<div class="container-fluid" style="margin-top: 50px; margin-bottom: 180px; width: 60%;zoom:75%">
+
+{{#if (ne busquedaOrigen "")}}
+    {{#each busquedaOrigen}}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #2e8a9b ;">{{tituloArchivo}}</h4>
+            <p class="card-text"><a style="font-weight: bold;">Archivo Subido:</a> {{date}}
+            </p>
+            <p class="card-text">
+                <a style="font-weight: bold;">Origen:</a> <a href="" style="color: black;"> {{origen}}</a>
+                | <a style="font-weight: bold;">Estación: </a> <a href="" style="color: black;">
+                    {{nombreestaciones}}</a>
+                {{#if (eq origen "INAMHI")}}
+                
+                <a style="font-weight: bold;">Magnitud:</a> <a href="" style="color: black;"> {{magnitud}}</a>
+            </p>
+
+            <p class="card-text"> <a style="font-weight: bold;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
+            </p>
+            <button class="btn btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: whitesmoke;">CSV</a></button>
+            <button class="btn btn-success"><a href="/users/downloadxlsx/{{id}}" style="color: black;">XLSX</a></button>
+            <button class="btn btn-info"><a href="/users/downloadtxt/{{id}}" style="color: black;">RCLIMDEX</a></button>
+            <button class="btn btn-secondary"><a href="/users/viewencabezados/{{id}}"
+                    style="color: whitesmoke;">Original</a></button>
+            {{else}}
+            <br>
+            <a style="font-weight: bold;">Magnitud:</a> <a href="" style="color: black;"> {{magnitud}}</a>
+            </p>
+
+            <p class="card-text"> <a style="font-weight: bold;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
+            </p>
+            <button class="btn btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: black;">CSV</a></button>
+            <button class="btn btn-success"><a href="/users/viewencabezados/{{id}}" style="color: black;">XLSX</a></button>
+            <button class="btn btn-secondary"><a href="/users/viewencabezados/{{id}}"
+                    style="color: whitesmoke;">Original</a></button>
+            {{/if}}
+        </div>
+    </div>
+<br>
+    {{/each}}
+    {{/if}}
 
     {{#each allfiles}}
     <div class="card">
@@ -81,14 +106,14 @@
 
             <p class="card-text"> <a style="font-weight: bold;">Rango: </a> Desde: {{fechainicio}} - Hasta: {{fechafin}}
             </p>
-            <button class="btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: black;">CSV</a></button>
-            <button class="btn-success"><a href="/users/viewencabezados/{{id}}" style="color: black;">XLSX</a></button>
-            <button class="btn-secondary"><a href="/users/viewencabezados/{{id}}"
+            <button class="btn btn-primary"><a href="/users/downloadcsv/{{id}}" style="color: black;">CSV</a></button>
+            <button class="btn btn-success"><a href="/users/viewencabezados/{{id}}" style="color: black;">XLSX</a></button>
+            <button class="btn btn-secondary"><a href="/users/viewencabezados/{{id}}"
                     style="color: whitesmoke;">Original</a></button>
             {{/if}}
         </div>
     </div>
-    </br>
+<br>
     {{/each}}
     <div class="row">
 

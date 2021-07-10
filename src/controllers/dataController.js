@@ -3,29 +3,29 @@ const Datos = require("../models/datos");
 
 
 class DataController {
-    constructor() {
-    }
+    constructor() {}
 
-    async GetDatos(idEncabezado,cb){
-        const archivos = await Encabezado.find({ _id:idEncabezado  });
-        await Datos.find({ encabezado:idEncabezado  }).populate('encabezado').then(data=>{
+    async GetDatos(idEncabezado, cb) {
+        const archivos = await Encabezado.find({ _id: idEncabezado });
+        await Datos.find({ encabezado: idEncabezado }).populate('encabezado').then(data => {
             let result = [];
             for (let index = 0; index < data.length; index++) {
                 const element = data[index];
-                const dato ={
+                const dato = {
 
-                    codigoEstacion: element.encabezado.codigoEstacion,
+                    codigoEstacion: element.codigoEstacion,
                     estacion: element.estacion,
                     fecha: element.fecha,
                     anio: element.fecha.split("/")[0],
                     mes: element.fecha.split("/")[1],
                     dia: element.fecha.split("/")[2],
                     valor: element.valor,
-                    magnitudArchivo: element.encabezado.magnitud
+                    magnitudArchivo: element.encabezado.magnitud,
+                    tieneNombreEstacion: element.estacion != undefined
                 }
                 result.push(dato);
             }
-        cb(result);
+            cb(result);
         });
     }
 }

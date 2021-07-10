@@ -13,7 +13,7 @@ router.get("/users/uploadrem", isAuthenticated, (req, res) => {
     res.render("users/datosremmaq.hbs");
 });
 
-router.post("/users/uploadrem", isAuthenticated, async (req, res) => {
+router.post("/users/uploadrem", isAuthenticated, async(req, res) => {
     const fileControllerInstance = new fileController();
     fileControllerInstance.ReadContentXlsFile(req.file.path, file => {
 
@@ -28,7 +28,7 @@ router.post("/users/uploadrem", isAuthenticated, async (req, res) => {
     });
 });
 
-router.post('/users/saveremmaq', isAuthenticated, async (req, res, next) => {
+router.post('/users/saveremmaq', isAuthenticated, async(req, res, next) => {
     const fileControllerInstance = new fileController();
     fileControllerInstance.ReadContentXlsFile(req.body.path, file => {
         file.userId = req.body.userid;
