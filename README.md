@@ -8,15 +8,27 @@ _El sistema desarrollado en el presente proyecto es un repositorio Web de archiv
 
 *Cristhian Fernando Salazar Cevallos
 
+*Rodrigo Efraín Tufiño Cárdenas
+
 ### Pre-requisitos 📋
 
 _Node JS, MongoDB Compass, Visual Studio Code_
 
+### Sitio web 📋
+
+https://datos-meteorologicos.grupoia.ec/index/1
+
+### Ejemplo archivos 📋
+-Ejemplos de los archivos de entrada admitidos por el sistema.
+
+https://drive.google.com/drive/folders/1g9ActQ0MzSVWwFjLePA4-4YeDcvm-Gm7?usp=sharing
 
 ### Instalación 🔧
 
 * Clonar el repositorio en la terminal de Visual Studio code o editor de código en uso
 ### `git clone https://github.com/crizgd221116/Repo-Met.git `
+* Ejecutar el comando 
+### `npm i `
 * Ejecutar el comando 
 ### `npm run dev `
 * Ingresar desde el navegador a la dirección
